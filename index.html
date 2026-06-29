@@ -375,7 +375,65 @@ button{font-family:inherit}
 .ust-published{color:var(--green);border-color:rgba(61,214,140,.3);background:rgba(61,214,140,.08)}
 .ust-draft{color:var(--text-dim);border-color:var(--line);background:var(--raised)}
 
-@media(max-width:980px){.kanban{grid-template-columns:repeat(3,1fr)}.studio{grid-template-columns:1fr}.shot-row{grid-template-columns:30px 70px 1fr 60px;font-size:12px}.shot-row .shot-cam,.shot-row .shot-lens,.shot-row .shot-dur{display:none}}
+/* ---- Music Library ---- */
+.music-list{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.music-row{display:grid;grid-template-columns:44px 1fr 110px 100px 70px 40px 36px;gap:var(--s4);align-items:center;padding:12px var(--s5);border-bottom:1px solid var(--line-soft);transition:background .12s var(--ease)}
+.music-row:hover{background:var(--raised)}
+.music-row.head{font-family:'JetBrains Mono';font-size:10px;letter-spacing:1px;color:var(--text-faint);text-transform:uppercase;background:var(--raised)}
+.play-btn{width:36px;height:36px;border-radius:50%;background:rgba(0,229,199,.1);border:1px solid rgba(0,229,199,.25);color:var(--mint);display:grid;place-items:center;cursor:pointer;transition:all .15s var(--ease)}
+.play-btn:hover{background:var(--mint);color:var(--mint-deep)}
+.play-btn.playing{background:var(--mint);color:var(--mint-deep);animation:pulse 1s var(--ease) infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(0,229,199,.15)}}
+.music-title b{font-family:'Space Grotesk';font-size:14px;display:block}
+.music-title small{color:var(--text-faint);font-size:12px}
+.mood-tag{font-family:'JetBrains Mono';font-size:10px;padding:3px 9px;border-radius:999px;background:rgba(124,156,255,.1);color:var(--indigo);border:1px solid rgba(124,156,255,.2);text-align:center}
+.music-fav{background:none;border:none;color:var(--text-faint);cursor:pointer;font-size:16px;transition:color .15s var(--ease)}
+.music-fav.on{color:var(--amber)}
+.music-del{width:26px;height:26px;border-radius:6px;background:transparent;border:1px solid var(--line);color:var(--text-faint);cursor:pointer;display:grid;place-items:center;transition:all .15s var(--ease)}
+.music-del:hover{border-color:var(--rose);color:var(--rose)}
+.license-note{font-size:12px;color:var(--text-faint);background:var(--raised);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:var(--s5);display:flex;gap:8px;align-items:center}
+
+/* ---- Thumbnail Studio ---- */
+.thumb-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.thumb-card{position:relative;cursor:pointer;padding:0;overflow:hidden}
+.thumb-preview{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.thumb-preview .concept{font-family:'Space Grotesk';font-weight:700;font-size:20px;text-align:center;padding:0 16px;line-height:1.2;text-shadow:0 2px 12px rgba(0,0,0,.6);z-index:1}
+.thumb-palette{position:absolute;bottom:8px;left:8px;display:flex;gap:4px;z-index:1}
+.thumb-palette span{width:16px;height:16px;border-radius:4px;border:1.5px solid rgba(255,255,255,.4)}
+.thumb-body{padding:var(--s4) var(--s5)}
+.thumb-body h4{font-family:'Space Grotesk';font-size:15px;font-weight:600;margin-bottom:6px}
+.ctr-stars{display:flex;gap:2px;color:var(--amber);font-size:14px}
+.thumb-foot{display:flex;align-items:center;justify-content:space-between;margin-top:var(--s3)}
+.thumb-actions{display:flex;gap:6px;opacity:0;transition:opacity .15s var(--ease)}
+.thumb-card:hover .thumb-actions{opacity:1}
+.tst-concept{color:var(--text-dim);border-color:var(--line);background:var(--raised)}
+.tst-testing{color:var(--amber);border-color:rgba(255,178,62,.3);background:rgba(255,178,62,.08)}
+.tst-winner{color:var(--mint);border-color:rgba(0,229,199,.3);background:rgba(0,229,199,.08)}
+
+/* ---- Daily Execution ---- */
+.exec-head{display:flex;align-items:center;gap:var(--s5);margin-bottom:var(--s6);flex-wrap:wrap}
+.daily-score{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s5) var(--s6);display:flex;align-items:center;gap:var(--s5)}
+.daily-score svg{transform:rotate(-90deg)}
+.daily-score svg circle{fill:none;stroke-width:8;stroke-linecap:round}
+.daily-score .dbg{stroke:var(--line)} .daily-score .dfg{stroke:var(--mint);transition:stroke-dashoffset .8s var(--ease)}
+.daily-score .num{font-family:'Space Grotesk';font-size:28px;font-weight:700}
+.daily-score .lbl{font-size:13px;color:var(--text-dim)}
+.task-card{display:flex;align-items:center;gap:var(--s4);background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px var(--s5);margin-bottom:var(--s3);cursor:grab;transition:border-color .15s var(--ease),opacity .15s var(--ease)}
+.task-card:hover{border-color:#33405280}
+.task-card.dragging{opacity:.4}
+.task-card.done{opacity:.55}
+.task-card .tcheck{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);cursor:pointer;flex:none;display:grid;place-items:center;transition:all .15s var(--ease)}
+.task-card .tcheck:hover{border-color:var(--mint)}
+.task-card.done .tcheck{background:var(--mint);border-color:var(--mint);color:var(--mint-deep)}
+.task-card .ttext{flex:1;font-size:14px}
+.task-card.done .ttext{text-decoration:line-through;color:var(--text-faint)}
+.task-card .tprio{width:4px;align-self:stretch;border-radius:4px;flex:none}
+.tprio-high{background:var(--rose)} .tprio-med{background:var(--amber)} .tprio-low{background:var(--text-faint)}
+.task-card .tdel{opacity:0;background:none;border:none;color:var(--text-faint);cursor:pointer;transition:color .15s var(--ease)}
+.task-card:hover .tdel{opacity:1} .task-card .tdel:hover{color:var(--rose)}
+.exec-filters{display:flex;gap:var(--s2);margin-bottom:var(--s5)}
+
+@media(max-width:980px){.kanban{grid-template-columns:repeat(3,1fr)}.studio{grid-template-columns:1fr}.shot-row{grid-template-columns:30px 70px 1fr 60px;font-size:12px}.shot-row .shot-cam,.shot-row .shot-lens,.shot-row .shot-dur{display:none}.music-row{grid-template-columns:40px 1fr 80px 36px}.music-row .m-genre,.music-row .m-dur,.music-row .m-fav{display:none}}
 @media(max-width:1100px){.context{display:none}}
 @media(max-width:720px){.workspace{padding:var(--s6) var(--s5)}.search{display:none}}
 </style>
@@ -413,6 +471,7 @@ button{font-family:inherit}
     <div class="nav-group">
       <div class="lbl">Workspace</div>
       <div class="nav-item active" data-view="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg><span>Command Center</span></div>
+      <div class="nav-item" data-view="daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Daily Execution</span></div>
     </div>
     <div class="nav-group">
       <div class="lbl">Planning</div>
@@ -425,6 +484,8 @@ button{font-family:inherit}
       <div class="nav-item" data-view="scripts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Script Studio</span></div>
       <div class="nav-item" data-view="shoots"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span>Shoot Planner</span></div>
       <div class="nav-item" data-view="shots"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18v13H3z"/><circle cx="12" cy="13" r="3.5"/><path d="M8 7l1.5-3h5L16 7"/></svg><span>Shot List</span></div>
+      <div class="nav-item" data-view="thumbs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><span>Thumbnail Studio</span></div>
+      <div class="nav-item" data-view="music"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span>Music Library</span></div>
       <div class="nav-item" data-view="pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="18"/><rect x="10" y="3" width="5" height="12"/><rect x="17" y="3" width="4" height="8"/></svg><span>Editing Pipeline</span></div>
       <div class="nav-item" data-view="uploads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4M8 8l4-4 4 4M4 20h16"/></svg><span>Upload Planner</span></div>
     </div>
@@ -544,6 +605,30 @@ function seed(){
       {id:uid(),title:"Daily posting recap",platform:"TikTok",date:"2026-06-28",time:"18:00",status:"published",caption:"30 days, here's what happened.",checklist:"Published ✓"}
     ]);
   }
+  if(!DB.get('music')){
+    DB.set('music',[
+      {id:uid(),title:"Sunrise Drive",artist:"My royalty-free pack",mood:"Upbeat",genre:"Lo-fi",dur:"2:14",fav:true,notes:"Great for intros. Licensed via Epidemic Sound."},
+      {id:uid(),title:"Quiet Focus",artist:"My royalty-free pack",mood:"Calm",genre:"Ambient",dur:"3:40",fav:false,notes:"Background for talking-head segments."},
+      {id:uid(),title:"Push Forward",artist:"My royalty-free pack",mood:"Energetic",genre:"Electronic",dur:"1:58",fav:true,notes:"Montage / B-roll energy."},
+      {id:uid(),title:"Late Night Edit",artist:"My own composition",mood:"Chill",genre:"Lo-fi",dur:"2:50",fav:false,notes:"Made this one myself — free to use anywhere."}
+    ]);
+  }
+  if(!DB.get('thumbs')){
+    DB.set('thumbs',[
+      {id:uid(),concept:"STOPPED GROWING?",title:"Plateau video — version A",palette:["#FF5C72","#0B0E14","#E8EBF0"],ctr:4,status:"testing",notes:"Shocked face + red arrow pointing down at graph."},
+      {id:uid(),concept:"$0 STUDIO",title:"Home studio — version A",palette:["#00E5C7","#12161F","#FFB23E"],ctr:5,status:"winner",notes:"Big yellow price tag crossed out. High contrast."},
+      {id:uid(),concept:"7 HOOKS",title:"Hooks Short cover",palette:["#7C9CFF","#0B0E14","#E8EBF0"],ctr:3,status:"concept",notes:"Number 7 huge, fishing-hook icon."}
+    ]);
+  }
+  if(!DB.get('daily')){
+    DB.set('daily',[
+      {id:uid(),text:"Record talking-head for plateau video",prio:"high",done:false},
+      {id:uid(),text:"Reply to SkillShare email",prio:"high",done:false},
+      {id:uid(),text:"Edit 7-hooks Short (final pass)",prio:"med",done:false},
+      {id:uid(),text:"Pick music for studio video",prio:"low",done:false},
+      {id:uid(),text:"Post yesterday's TikTok",prio:"med",done:true}
+    ]);
+  }
   if(!DB.get('deals')){
     DB.set('deals',[
       {id:uid(),company:"SkillShare",contact:"Jordan Lee",email:"jordan@skillshare.com",payment:1200,deadline:"2026-07-15",status:"negotiating",notes:"60-sec integration, two-video package. Pushing for $1,500."},
@@ -574,7 +659,7 @@ function toast(title,msg){
 const WS=document.getElementById('workspace'), CTX=document.getElementById('context');
 function render(){
   WS.classList.remove('fade-in');void WS.offsetWidth;WS.classList.add('fade-in');
-  ({dashboard:renderDashboard,calendar:renderCalendar,ideas:renderIdeas,scripts:renderScripts,pipeline:renderPipeline,deals:renderDeals,settings:renderSettings,analytics:renderAnalytics,growth:renderGrowth,goals:renderGoals,shoots:renderShoots,shots:renderShots,uploads:renderUploads}[view]||renderSoon)();
+  ({dashboard:renderDashboard,calendar:renderCalendar,ideas:renderIdeas,scripts:renderScripts,pipeline:renderPipeline,deals:renderDeals,settings:renderSettings,analytics:renderAnalytics,growth:renderGrowth,goals:renderGoals,shoots:renderShoots,shots:renderShots,uploads:renderUploads,music:renderMusic,thumbs:renderThumbs,daily:renderDaily}[view]||renderSoon)();
   renderContext();
 }
 
@@ -1212,6 +1297,182 @@ function openUploadModal(id){
   }, id?()=>{confirmModal('Delete this upload?','Removed from your plan.',()=>{DB.set('uploads',DB.get('uploads',[]).filter(x=>x.id!==id));renderUploads();renderContext();toast('Upload deleted');});}:null);
 }
 function deleteUpload(id){confirmModal('Delete this upload?','Removed from your plan.',()=>{DB.set('uploads',DB.get('uploads',[]).filter(x=>x.id!==id));renderUploads();renderContext();toast('Upload deleted');});}
+
+/* ----- Music Library ----- */
+const MOODS=['Upbeat','Calm','Energetic','Chill','Dramatic','Happy','Tense'];
+let audioCtx;
+function playTone(mood){
+  try{
+    audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+    const freqs={Upbeat:[523,659,784],Calm:[330,392],Energetic:[440,554,659],Chill:[294,370],Dramatic:[220,277],Happy:[523,659],Tense:[233,247]}[mood]||[440,554];
+    freqs.forEach((f,i)=>{
+      const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+      o.type='sine';o.frequency.value=f;o.connect(g);g.connect(audioCtx.destination);
+      const t=audioCtx.currentTime+i*0.12;
+      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.18,t+.03);g.gain.exponentialRampToValueAtTime(.001,t+.5);
+      o.start(t);o.stop(t+.5);
+    });
+  }catch(e){/* audio not available — silent */}
+}
+function renderMusic(){
+  const tracks=DB.get('music',[]);
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Music Library</h1><p>Organize your own and royalty-free tracks by mood and genre.</p></div>
+     <div class="right"><button class="btn btn-primary" onclick="openMusicModal()">＋ Add track</button></div></div>
+   <div class="license-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> For organizing music you own or have licensed (royalty-free, purchased, or your own). AzMix doesn't host or provide copyrighted audio. Preview plays a short mood tone, not the track.</div>
+   ${tracks.length?`<div class="music-list">
+     <div class="music-row head"><span></span><span>Track</span><span>Mood</span><span class="m-genre">Genre</span><span class="m-dur">Length</span><span class="m-fav"></span><span></span></div>
+     ${tracks.map(musicRow).join('')}
+   </div>`:emptyState('Build your sound library','Add the tracks you own or have licensed, tagged by mood so you find the right one fast.','Add track','openMusicModal()')}`;
+}
+function musicRow(t){
+  return `<div class="music-row">
+    <button class="play-btn" onclick="previewTrack(this,'${esc(t.mood)}')" title="Preview mood tone"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    <div class="music-title" onclick="openMusicModal('${t.id}')" style="cursor:pointer"><b>${esc(t.title)}</b><small>${esc(t.artist||'')}</small></div>
+    <span class="mood-tag">${esc(t.mood)}</span>
+    <span class="shot-mono m-genre">${esc(t.genre||'—')}</span>
+    <span class="shot-mono m-dur">${esc(t.dur||'—')}</span>
+    <button class="music-fav m-fav ${t.fav?'on':''}" onclick="toggleMusicFav('${t.id}')" title="Favorite">${t.fav?'★':'☆'}</button>
+    <button class="music-del" onclick="deleteMusic('${t.id}')" title="Delete"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>`;
+}
+function previewTrack(btn,mood){btn.classList.add('playing');playTone(mood);setTimeout(()=>btn.classList.remove('playing'),700);}
+function toggleMusicFav(id){const l=DB.get('music',[]);const t=l.find(x=>x.id===id);if(t){t.fav=!t.fav;DB.set('music',l);renderMusic();}}
+function openMusicModal(id){
+  const t=id?DB.get('music',[]).find(x=>x.id===id):null;
+  openModal(id?'Edit track':'Add track',`
+    <div class="field" id="f_mtitle"><label>Track title</label><input id="m_title" value="${t?esc(t.title):''}" placeholder="e.g. Sunrise Drive"><span class="err">Add a title.</span></div>
+    <div class="field"><label>Artist / source</label><input id="m_artist" value="${t?esc(t.artist||''):''}" placeholder="Your name, or where it's licensed from"></div>
+    <div class="row2">
+      <div class="field"><label>Mood</label><select id="m_mood">${MOODS.map(mo=>`<option ${t&&t.mood===mo?'selected':''}>${mo}</option>`).join('')}</select></div>
+      <div class="field"><label>Genre</label><input id="m_genre" value="${t?esc(t.genre||''):''}" placeholder="Lo-fi"></div>
+    </div>
+    <div class="field"><label>Length</label><input id="m_dur" value="${t?esc(t.dur||''):''}" placeholder="2:14"></div>
+    <div class="field"><label>Notes (license, where you've used it)</label><textarea id="m_notes" placeholder="Licensed via… / used in…">${t?esc(t.notes||''):''}</textarea></div>
+  `,()=>{
+    const title=val('m_title').trim();
+    if(!title){document.getElementById('f_mtitle').classList.add('invalid');return false;}
+    const list=DB.get('music',[]);
+    const data={title,artist:val('m_artist'),mood:val('m_mood'),genre:val('m_genre'),dur:val('m_dur'),notes:val('m_notes')};
+    if(t)Object.assign(t,data);else list.push({id:uid(),fav:false,...data});
+    DB.set('music',list);renderMusic();toast(t?'Track updated':'Track added','In your library.');return true;
+  }, id?()=>{confirmModal('Delete this track?','Removed from your library.',()=>{DB.set('music',DB.get('music',[]).filter(x=>x.id!==id));renderMusic();toast('Track deleted');});}:null);
+}
+function deleteMusic(id){confirmModal('Delete this track?','Removed from your library.',()=>{DB.set('music',DB.get('music',[]).filter(x=>x.id!==id));renderMusic();toast('Track deleted');});}
+
+/* ----- Thumbnail Studio ----- */
+const THUMB_ST=['concept','testing','winner'];
+function renderThumbs(){
+  const thumbs=DB.get('thumbs',[]);
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Thumbnail Studio</h1><p>Organize thumbnail concepts and track which ones win.</p></div>
+     <div class="right"><button class="btn btn-primary" onclick="openThumbModal()">＋ New concept</button></div></div>
+   ${thumbs.length?`<div class="grid thumb-grid">${thumbs.map(thumbCard).join('')}</div>`:emptyState('Concepts that get clicks','Sketch out thumbnail ideas, set a color palette, and track CTR so your best concepts win.','New concept','openThumbModal()')}`;
+}
+function thumbCard(t){
+  const pal=t.palette||['#12161F','#00E5C7','#E8EBF0'];
+  const bg=`linear-gradient(135deg, ${pal[0]}, ${pal[1]||pal[0]})`;
+  return `<div class="card hover thumb-card" onclick="openThumbModal('${t.id}')">
+    <div class="thumb-preview" style="background:${bg}">
+      <span class="concept" style="color:${pal[2]||'#fff'}">${esc(t.concept||'')}</span>
+      <div class="thumb-palette">${pal.map(c=>`<span style="background:${c}"></span>`).join('')}</div>
+    </div>
+    <div class="thumb-body">
+      <h4>${esc(t.title)}</h4>
+      <div class="thumb-foot">
+        <span class="pill tst-${t.status}">${t.status}</span>
+        <span class="ctr-stars">${'★'.repeat(t.ctr||0)}${'☆'.repeat(5-(t.ctr||0))}</span>
+      </div>
+      <div class="thumb-foot">
+        <span class="shot-mono" style="font-size:11px">CTR rating</span>
+        <div class="thumb-actions">
+          <button class="mini-btn" onclick="event.stopPropagation();openThumbModal('${t.id}')" title="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
+          <button class="mini-btn del" onclick="event.stopPropagation();deleteThumb('${t.id}')" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+function openThumbModal(id){
+  const t=id?DB.get('thumbs',[]).find(x=>x.id===id):null;
+  const pal=t?t.palette||['#00E5C7','#12161F','#E8EBF0']:['#00E5C7','#12161F','#E8EBF0'];
+  openModal(id?'Edit concept':'New thumbnail concept',`
+    <div class="field" id="f_ttitle"><label>Concept name</label><input id="th_title" value="${t?esc(t.title):''}" placeholder="e.g. Plateau video — version A"><span class="err">Name the concept.</span></div>
+    <div class="field"><label>Big text on thumbnail</label><input id="th_concept" value="${t?esc(t.concept||''):''}" placeholder="e.g. STOPPED GROWING?"></div>
+    <div class="row2">
+      <div class="field"><label>Status</label><select id="th_status">${THUMB_ST.map(s=>`<option ${t&&t.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+      <div class="field"><label>CTR rating (1–5)</label><select id="th_ctr">${[1,2,3,4,5].map(n=>`<option ${t&&t.ctr===n?'selected':''}>${n}</option>`).join('')}</select></div>
+    </div>
+    <div class="field"><label>Color palette</label><div style="display:flex;gap:10px">
+      <input type="color" id="th_c1" value="${pal[0]}" style="width:100%;height:40px;border:1px solid var(--line);border-radius:8px;background:var(--raised);cursor:pointer">
+      <input type="color" id="th_c2" value="${pal[1]}" style="width:100%;height:40px;border:1px solid var(--line);border-radius:8px;background:var(--raised);cursor:pointer">
+      <input type="color" id="th_c3" value="${pal[2]}" style="width:100%;height:40px;border:1px solid var(--line);border-radius:8px;background:var(--raised);cursor:pointer">
+    </div></div>
+    <div class="field"><label>Notes</label><textarea id="th_notes" placeholder="Composition, expression, what to test…">${t?esc(t.notes||''):''}</textarea></div>
+  `,()=>{
+    const title=val('th_title').trim();
+    if(!title){document.getElementById('f_ttitle').classList.add('invalid');return false;}
+    const list=DB.get('thumbs',[]);
+    const data={title,concept:val('th_concept'),status:val('th_status'),ctr:+val('th_ctr'),palette:[val('th_c1'),val('th_c2'),val('th_c3')],notes:val('th_notes')};
+    if(t)Object.assign(t,data);else list.push({id:uid(),...data});
+    DB.set('thumbs',list);renderThumbs();toast(t?'Concept updated':'Concept added','Looking sharp.');return true;
+  }, id?()=>{confirmModal('Delete this concept?','Removed from the studio.',()=>{DB.set('thumbs',DB.get('thumbs',[]).filter(x=>x.id!==id));renderThumbs();toast('Concept deleted');});}:null);
+}
+function deleteThumb(id){confirmModal('Delete this concept?','Removed from the studio.',()=>{DB.set('thumbs',DB.get('thumbs',[]).filter(x=>x.id!==id));renderThumbs();toast('Concept deleted');});}
+
+/* ----- Daily Execution ----- */
+let dailyDragId=null;
+function renderDaily(){
+  const tasks=DB.get('daily',[]);
+  const done=tasks.filter(t=>t.done).length;
+  const pct=tasks.length?Math.round(done/tasks.length*100):0;
+  const C=2*Math.PI*34, off=C-(pct/100)*C;
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Daily Execution</h1><p>Just today. What moves the needle right now.</p></div>
+     <div class="right"><button class="btn btn-primary" onclick="openDailyModal()">＋ Add task</button></div></div>
+   <div class="exec-head">
+     <div class="daily-score">
+       <svg width="80" height="80" viewBox="0 0 80 80"><circle class="dbg" cx="40" cy="40" r="34"/><circle class="dfg" cx="40" cy="40" r="34" stroke-dasharray="${C}" stroke-dashoffset="${off}"/></svg>
+       <div><div class="num">${pct}%</div><div class="lbl">${done} of ${tasks.length} done</div></div>
+     </div>
+     <div class="daily-score"><div><div class="num">${tasks.filter(t=>!t.done&&t.prio==='high').length}</div><div class="lbl">high-priority left</div></div></div>
+   </div>
+   ${tasks.length?`<div id="dailyList">${tasks.map(taskCard).join('')}</div>`:emptyState('A clear, focused day','Add what matters today. Drag to reorder, check off as you go.','Add task','openDailyModal()')}`;
+}
+function taskCard(t){
+  return `<div class="task-card ${t.done?'done':''}" draggable="true" ondragstart="dailyStart(event,'${t.id}')" ondragend="dailyEnd(event)" ondragover="dailyOver(event,'${t.id}')">
+    <span class="tprio tprio-${t.prio}"></span>
+    <div class="tcheck" onclick="toggleDaily('${t.id}')">${t.done?'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>':''}</div>
+    <span class="ttext">${esc(t.text)}</span>
+    <button class="tdel" onclick="deleteDaily('${t.id}')" title="Delete"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>`;
+}
+function toggleDaily(id){const l=DB.get('daily',[]);const t=l.find(x=>x.id===id);if(t){t.done=!t.done;DB.set('daily',l);renderDaily();if(t.done&&l.every(x=>x.done))setTimeout(()=>toast('Day cleared! 🎯','Every task done. That\'s a great day.'),200);}}
+function dailyStart(e,id){dailyDragId=id;e.currentTarget.classList.add('dragging');}
+function dailyEnd(e){e.currentTarget.classList.remove('dragging');}
+function dailyOver(e,overId){
+  e.preventDefault();
+  if(dailyDragId===overId)return;
+  const l=DB.get('daily',[]);
+  const from=l.findIndex(t=>t.id===dailyDragId), to=l.findIndex(t=>t.id===overId);
+  if(from<0||to<0)return;
+  const [moved]=l.splice(from,1);l.splice(to,0,moved);
+  DB.set('daily',l);renderDaily();
+}
+function openDailyModal(id){
+  const t=id?DB.get('daily',[]).find(x=>x.id===id):null;
+  openModal(id?'Edit task':'Add task',`
+    <div class="field" id="f_dtext"><label>Task</label><input id="dl_text" value="${t?esc(t.text):''}" placeholder="What needs doing today?"><span class="err">Describe the task.</span></div>
+    <div class="field"><label>Priority</label><select id="dl_prio"><option ${t&&t.prio==='high'?'selected':''}>high</option><option ${t&&t.prio==='med'?'selected':''}>med</option><option ${t&&t.prio==='low'?'selected':''}>low</option></select></div>
+  `,()=>{
+    const text=val('dl_text').trim();
+    if(!text){document.getElementById('f_dtext').classList.add('invalid');return false;}
+    const list=DB.get('daily',[]);
+    if(t)Object.assign(t,{text,prio:val('dl_prio')});else list.push({id:uid(),text,prio:val('dl_prio'),done:false});
+    DB.set('daily',list);renderDaily();toast(t?'Task updated':'Task added','On today\'s list.');return true;
+  }, id?()=>{confirmModal('Delete this task?','Removed from today.',()=>{DB.set('daily',DB.get('daily',[]).filter(x=>x.id!==id));renderDaily();toast('Task deleted');});}:null);
+}
+function deleteDaily(id){confirmModal('Delete this task?','Removed from today.',()=>{DB.set('daily',DB.get('daily',[]).filter(x=>x.id!==id));renderDaily();toast('Task deleted');});}
 
 /* ----- Profile / Settings ----- */
 function profile(){return DB.get('profile',{name:'Sajina',handle:'@sajina',role:'Content Creator'})}
