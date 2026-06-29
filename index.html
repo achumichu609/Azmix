@@ -433,6 +433,24 @@ button{font-family:inherit}
 .task-card:hover .tdel{opacity:1} .task-card .tdel:hover{color:var(--rose)}
 .exec-filters{display:flex;gap:var(--s2);margin-bottom:var(--s5)}
 
+/* ---- Creator Finance ---- */
+.fin-summary{grid-template-columns:repeat(auto-fit,minmax(165px,1fr));margin-bottom:var(--s6)}
+.fin-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s5);border-top:3px solid var(--line)}
+.fin-card.income{border-top-color:var(--green)} .fin-card.expense{border-top-color:var(--rose)}
+.fin-card.profit{border-top-color:var(--mint)} .fin-card.tax{border-top-color:var(--amber)}
+.fin-card.savings{border-top-color:var(--indigo)}
+.fin-card .k{font-family:'JetBrains Mono';font-size:10px;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase}
+.fin-card .v{font-family:'Space Grotesk';font-size:26px;font-weight:700;margin-top:6px}
+.fin-card .d{font-size:11px;color:var(--text-faint);margin-top:3px}
+.fin-tx{display:grid;grid-template-columns:1fr 110px 110px 36px;gap:var(--s4);align-items:center;padding:11px var(--s5);border-bottom:1px solid var(--line-soft);font-size:13px;transition:background .12s var(--ease)}
+.fin-tx:hover{background:var(--raised)}
+.fin-tx.head{font-family:'JetBrains Mono';font-size:10px;letter-spacing:1px;color:var(--text-faint);text-transform:uppercase;background:var(--raised)}
+.fin-tx .amt{font-family:'JetBrains Mono';text-align:right;font-weight:500}
+.fin-tx .amt.in{color:var(--green)} .fin-tx .amt.out{color:var(--rose)}
+.fin-tx .cat{font-family:'JetBrains Mono';font-size:11px;color:var(--text-dim)}
+.fin-del{width:26px;height:26px;border-radius:6px;background:transparent;border:1px solid var(--line);color:var(--text-faint);cursor:pointer;display:grid;place-items:center;transition:all .15s var(--ease)}
+.fin-del:hover{border-color:var(--rose);color:var(--rose)}
+
 @media(max-width:980px){.kanban{grid-template-columns:repeat(3,1fr)}.studio{grid-template-columns:1fr}.shot-row{grid-template-columns:30px 70px 1fr 60px;font-size:12px}.shot-row .shot-cam,.shot-row .shot-lens,.shot-row .shot-dur{display:none}.music-row{grid-template-columns:40px 1fr 80px 36px}.music-row .m-genre,.music-row .m-dur,.music-row .m-fav{display:none}}
 /* hamburger hidden on desktop; sidebar is a fixed drawer on mobile */
 .menu-toggle{display:none;flex:none}
@@ -504,7 +522,7 @@ button{font-family:inherit}
     <div class="nav-group">
       <div class="lbl">Business</div>
       <div class="nav-item" data-view="deals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1Z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span>Brand Deals</span></div>
-      <div class="nav-item" data-view="finance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Creator Finance</span><span class="soon">SOON</span></div>
+      <div class="nav-item" data-view="finance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Creator Finance</span></div>
     </div>
     <div class="nav-group">
       <div class="lbl">Growth</div>
@@ -642,6 +660,18 @@ function seed(){
       {id:uid(),text:"Post yesterday's TikTok",prio:"med",done:true}
     ]);
   }
+  if(!DB.get('finance')){
+    DB.set('finance',[
+      {id:uid(),label:"YouTube AdSense",type:"income",cat:"Platform",amount:1840,date:"2026-06-05"},
+      {id:uid(),label:"Squarespace sponsorship",type:"income",cat:"Sponsor",amount:1800,date:"2026-06-12"},
+      {id:uid(),label:"Channel memberships",type:"income",cat:"Platform",amount:420,date:"2026-06-15"},
+      {id:uid(),label:"Affiliate links",type:"income",cat:"Affiliate",amount:310,date:"2026-06-20"},
+      {id:uid(),label:"Editing software (Adobe)",type:"expense",cat:"Software",amount:55,date:"2026-06-02"},
+      {id:uid(),label:"Music license (Epidemic)",type:"expense",cat:"Software",amount:15,date:"2026-06-02"},
+      {id:uid(),label:"New SD cards",type:"expense",cat:"Gear",amount:90,date:"2026-06-08"},
+      {id:uid(),label:"Freelance editor (Maya)",type:"expense",cat:"Contractor",amount:400,date:"2026-06-18"}
+    ]);
+  }
   if(!DB.get('deals')){
     DB.set('deals',[
       {id:uid(),company:"SkillShare",contact:"Jordan Lee",email:"jordan@skillshare.com",payment:1200,deadline:"2026-07-15",status:"negotiating",notes:"60-sec integration, two-video package. Pushing for $1,500."},
@@ -672,7 +702,7 @@ function toast(title,msg){
 const WS=document.getElementById('workspace'), CTX=document.getElementById('context');
 function render(){
   WS.classList.remove('fade-in');void WS.offsetWidth;WS.classList.add('fade-in');
-  ({dashboard:renderDashboard,calendar:renderCalendar,ideas:renderIdeas,scripts:renderScripts,pipeline:renderPipeline,deals:renderDeals,settings:renderSettings,analytics:renderAnalytics,growth:renderGrowth,goals:renderGoals,shoots:renderShoots,shots:renderShots,uploads:renderUploads,music:renderMusic,thumbs:renderThumbs,daily:renderDaily}[view]||renderSoon)();
+  ({dashboard:renderDashboard,calendar:renderCalendar,ideas:renderIdeas,scripts:renderScripts,pipeline:renderPipeline,deals:renderDeals,settings:renderSettings,analytics:renderAnalytics,growth:renderGrowth,goals:renderGoals,shoots:renderShoots,shots:renderShots,uploads:renderUploads,music:renderMusic,thumbs:renderThumbs,daily:renderDaily,finance:renderFinance}[view]||renderSoon)();
   renderContext();
 }
 
@@ -1486,6 +1516,84 @@ function openDailyModal(id){
   }, id?()=>{confirmModal('Delete this task?','Removed from today.',()=>{DB.set('daily',DB.get('daily',[]).filter(x=>x.id!==id));renderDaily();toast('Task deleted');});}:null);
 }
 function deleteDaily(id){confirmModal('Delete this task?','Removed from today.',()=>{DB.set('daily',DB.get('daily',[]).filter(x=>x.id!==id));renderDaily();toast('Task deleted');});}
+
+/* ----- Creator Finance ----- */
+const FIN_CATS_IN=['Platform','Sponsor','Affiliate','Merch','Other'];
+const FIN_CATS_OUT=['Software','Gear','Contractor','Marketing','Other'];
+function renderFinance(){
+  const tx=DB.get('finance',[]);
+  const income=tx.filter(t=>t.type==='income').reduce((s,t)=>s+(+t.amount||0),0);
+  const expense=tx.filter(t=>t.type==='expense').reduce((s,t)=>s+(+t.amount||0),0);
+  const profit=income-expense;
+  const tax=Math.round(profit*0.25);
+  const savings=Math.round(profit*0.2);
+  const fmt=n=>'$'+Math.round(n).toLocaleString();
+  // income sources donut
+  const srcMap={};tx.filter(t=>t.type==='income').forEach(t=>srcMap[t.cat]=(srcMap[t.cat]||0)+(+t.amount||0));
+  const palette=['var(--green)','var(--mint)','var(--indigo)','var(--amber)','var(--rose)'];
+  const sources=Object.keys(srcMap).map((k,i)=>({label:k,value:srcMap[k],color:palette[i%palette.length]}));
+  // 6-month profit trend (seeded illustrative + current)
+  const trend=[{label:'Jan',value:1800},{label:'Feb',value:2100},{label:'Mar',value:2600},{label:'Apr',value:2400},{label:'May',value:3000},{label:'Jun',value:profit}];
+  const sorted=tx.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Creator Finance</h1><p>Where the money comes from, where it goes, what's left.</p></div>
+     <div class="right"><button class="btn btn-primary" onclick="openFinModal()">＋ Add entry</button></div></div>
+   <div class="grid fin-summary">
+     <div class="fin-card income"><div class="k">Revenue</div><div class="v">${fmt(income)}</div><div class="d">this month</div></div>
+     <div class="fin-card expense"><div class="k">Expenses</div><div class="v">${fmt(expense)}</div><div class="d">this month</div></div>
+     <div class="fin-card profit"><div class="k">Profit</div><div class="v">${fmt(profit)}</div><div class="d">revenue − expenses</div></div>
+     <div class="fin-card tax"><div class="k">Set aside (tax)</div><div class="v">${fmt(tax)}</div><div class="d">~25% of profit</div></div>
+     <div class="fin-card savings"><div class="k">Savings goal</div><div class="v">${fmt(savings)}</div><div class="d">~20% of profit</div></div>
+   </div>
+   <div class="chart-card"><h3>Profit trend<span class="tag">last 6 months</span></h3>${lineChart(trend,v=>'$'+(v/1000).toFixed(1)+'K')}</div>
+   ${sources.length?`<div class="chart-card"><h3>Income sources<span class="tag">${fmt(income)} total</span></h3>
+     <div class="donut-wrap">${donut(sources)}
+       <div class="donut-legend">${sources.map(s=>`<div class="li"><span class="sw" style="background:${s.color}"></span>${s.label}<span class="amt">${fmt(s.value)}</span></div>`).join('')}</div>
+     </div></div>`:''}
+   <div class="chart-card" style="padding-bottom:0"><h3>Transactions<span class="tag">${tx.length} entries</span></h3>
+     <div style="margin:0 calc(-1*var(--s6))">
+       <div class="fin-tx head"><span>Entry</span><span>Category</span><span style="text-align:right">Amount</span><span></span></div>
+       ${sorted.map(finRow).join('')}
+     </div>
+   </div>
+   <p style="color:var(--text-faint);font-size:12px;margin-top:16px">Tax and savings figures are rough estimates to help you plan, not financial advice. Check with a professional for your actual obligations.</p>`;
+}
+function finRow(t){
+  const fmt=n=>'$'+Math.round(n).toLocaleString();
+  return `<div class="fin-tx">
+    <span onclick="openFinModal('${t.id}')" style="cursor:pointer">${esc(t.label)}</span>
+    <span class="cat">${esc(t.cat||'')}</span>
+    <span class="amt ${t.type==='income'?'in':'out'}">${t.type==='income'?'+':'−'}${fmt(t.amount)}</span>
+    <button class="fin-del" onclick="deleteFin('${t.id}')" title="Delete"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>`;
+}
+function openFinModal(id){
+  const t=id?DB.get('finance',[]).find(x=>x.id===id):null;
+  const type=t?t.type:'income';
+  openModal(id?'Edit entry':'Add entry',`
+    <div class="field"><label>Type</label><select id="fn_type" onchange="finSwapCats(this.value)">${['income','expense'].map(ty=>`<option ${type===ty?'selected':''}>${ty}</option>`).join('')}</select></div>
+    <div class="field" id="f_fnlabel"><label>Description</label><input id="fn_label" value="${t?esc(t.label):''}" placeholder="e.g. YouTube AdSense"><span class="err">Add a description.</span></div>
+    <div class="row2">
+      <div class="field"><label>Category</label><select id="fn_cat"></select></div>
+      <div class="field"><label>Amount ($)</label><input type="number" id="fn_amount" value="${t?t.amount:''}" placeholder="500"></div>
+    </div>
+    <div class="field"><label>Date</label><input type="date" id="fn_date" value="${t?t.date||'':new Date().toISOString().slice(0,10)}"></div>
+  `,()=>{
+    const label=val('fn_label').trim();
+    if(!label){document.getElementById('f_fnlabel').classList.add('invalid');return false;}
+    const list=DB.get('finance',[]);
+    const data={label,type:val('fn_type'),cat:val('fn_cat'),amount:+val('fn_amount')||0,date:val('fn_date')};
+    if(t)Object.assign(t,data);else list.push({id:uid(),...data});
+    DB.set('finance',list);renderFinance();toast(t?'Entry updated':'Entry added','Books updated.');return true;
+  }, id?()=>{confirmModal('Delete this entry?','Removed from your books.',()=>{DB.set('finance',DB.get('finance',[]).filter(x=>x.id!==id));renderFinance();toast('Entry deleted');});}:null);
+  finSwapCats(type, t?t.cat:null);
+}
+function finSwapCats(type,selected){
+  const sel=document.getElementById('fn_cat');if(!sel)return;
+  const cats=type==='income'?FIN_CATS_IN:FIN_CATS_OUT;
+  sel.innerHTML=cats.map(c=>`<option ${selected===c?'selected':''}>${c}</option>`).join('');
+}
+function deleteFin(id){confirmModal('Delete this entry?','Removed from your books.',()=>{DB.set('finance',DB.get('finance',[]).filter(x=>x.id!==id));renderFinance();toast('Entry deleted');});}
 
 /* ----- Profile / Settings ----- */
 function profile(){return DB.get('profile',{name:'Sajina',handle:'@sajina',role:'Content Creator'})}
