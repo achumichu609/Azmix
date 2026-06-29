@@ -267,7 +267,115 @@ button{font-family:inherit}
 .st-paid{color:var(--green);border-color:rgba(61,214,140,.3);background:rgba(61,214,140,.08)}
 .deal-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s4);margin-bottom:var(--s6)}
 
-@media(max-width:980px){.kanban{grid-template-columns:repeat(3,1fr)}.studio{grid-template-columns:1fr}}
+/* ---- Analytics / charts ---- */
+.metric-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:var(--s6)}
+.metric{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s5)}
+.metric .k{font-family:'JetBrains Mono';font-size:10px;letter-spacing:1px;color:var(--text-dim);text-transform:uppercase}
+.metric .v{font-family:'Space Grotesk';font-size:26px;font-weight:700;margin-top:6px}
+.metric .d{font-size:11px;margin-top:3px}
+.metric .d.up{color:var(--green)} .metric .d.dn{color:var(--rose)}
+.chart-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s6);margin-bottom:var(--s5)}
+.chart-card h3{font-family:'Space Grotesk';font-size:15px;font-weight:600;margin-bottom:var(--s5);display:flex;align-items:center;gap:var(--s3)}
+.chart-card h3 .tag{margin-left:auto;font-family:'JetBrains Mono';font-size:10px;color:var(--text-faint);font-weight:400}
+.chart-svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-svg .gl{stroke:var(--line-soft);stroke-width:1}
+.chart-svg .axlbl{fill:var(--text-faint);font-family:'JetBrains Mono';font-size:10px}
+.chart-svg .area{fill:url(#mintgrad);opacity:.9}
+.chart-svg .linepath{fill:none;stroke:var(--mint);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart-svg .dot{fill:var(--mint);stroke:var(--panel);stroke-width:2;opacity:0;transition:opacity .15s var(--ease)}
+.chart-svg .hot:hover .dot{opacity:1}
+.chart-svg .bar{fill:var(--mint-dim);transition:fill .15s var(--ease);cursor:pointer}
+.chart-svg .bar:hover{fill:var(--mint)}
+.chart-tip{position:fixed;background:var(--raised);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 12px;font-size:12px;box-shadow:var(--sh-md);pointer-events:none;opacity:0;transition:opacity .12s var(--ease);z-index:90}
+.chart-tip b{font-family:'Space Grotesk';display:block}
+.chart-tip small{color:var(--text-dim);font-family:'JetBrains Mono';font-size:10px}
+.donut-wrap{display:flex;align-items:center;gap:var(--s7);flex-wrap:wrap}
+.donut-legend{display:flex;flex-direction:column;gap:var(--s3)}
+.donut-legend .li{display:flex;align-items:center;gap:var(--s3);font-size:13px}
+.donut-legend .sw{width:12px;height:12px;border-radius:3px;flex:none}
+.donut-legend .amt{margin-left:auto;font-family:'JetBrains Mono';color:var(--text-dim);font-size:12px;padding-left:var(--s5)}
+
+/* ---- Growth Engine ---- */
+.ring-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.ring-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s6);text-align:center}
+.ring-card svg{transform:rotate(-90deg);margin-bottom:var(--s3)}
+.ring-card svg circle{fill:none;stroke-width:9;stroke-linecap:round}
+.ring-card .rbg{stroke:var(--line)}
+.ring-card .rfg{stroke:var(--mint);transition:stroke-dashoffset 1.2s var(--ease)}
+.ring-card .pct{font-family:'Space Grotesk';font-size:22px;font-weight:700}
+.ring-card .lbl{font-size:13px;color:var(--text-dim);margin-top:2px}
+.ring-card .sub{font-family:'JetBrains Mono';font-size:11px;color:var(--text-faint);margin-top:6px}
+.milestone{display:flex;align-items:center;gap:var(--s4);padding:var(--s4) 0;border-bottom:1px solid var(--line-soft)}
+.milestone .badge{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none;font-size:16px}
+.milestone.done .badge{background:rgba(0,229,199,.12);color:var(--mint)}
+.milestone.pending .badge{background:var(--raised);color:var(--text-faint);border:1px solid var(--line)}
+.milestone .mtext b{font-family:'Space Grotesk';font-size:14px;display:block}
+.milestone .mtext small{color:var(--text-faint);font-size:12px}
+.milestone.done .mtext b{color:var(--text)} .milestone.pending .mtext b{color:var(--text-dim)}
+
+/* ---- Goals ---- */
+.goal-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.goal-card{position:relative;cursor:pointer}
+.goal-card .gcat{font-family:'JetBrains Mono';font-size:10px;letter-spacing:1px;color:var(--mint);text-transform:uppercase}
+.goal-card h4{font-family:'Space Grotesk';font-size:17px;font-weight:600;margin:6px 0 var(--s4);line-height:1.3}
+.goal-card .gbar{height:8px;background:var(--line);border-radius:999px;overflow:hidden;margin:var(--s3) 0}
+.goal-card .gbar i{display:block;height:100%;background:linear-gradient(90deg,var(--mint-dim),var(--mint));border-radius:999px;transition:width .8s var(--ease)}
+.goal-card .gmeta{display:flex;justify-content:space-between;font-size:12px;color:var(--text-dim)}
+.goal-card .greward{margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--line-soft);font-size:12px;color:var(--text-dim);display:flex;align-items:center;gap:8px}
+.goal-card .gactions{position:absolute;top:var(--s4);right:var(--s4);display:flex;gap:6px;opacity:0;transition:opacity .15s var(--ease)}
+.goal-card:hover .gactions{opacity:1}
+.goal-filter{display:flex;gap:var(--s2);flex-wrap:wrap;margin-bottom:var(--s5)}
+.gfilter-btn{font-family:'JetBrains Mono';font-size:11px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--raised);color:var(--text-dim);cursor:pointer;transition:all .15s var(--ease)}
+.gfilter-btn:hover{border-color:#33405280;color:var(--text)}
+.gfilter-btn.active{border-color:var(--mint);color:var(--mint);background:rgba(0,229,199,.07)}
+
+/* ---- Shoot Planner ---- */
+.shoot-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.shoot-card{position:relative;cursor:pointer}
+.shoot-card .shead{display:flex;align-items:flex-start;gap:var(--s3);margin-bottom:var(--s4)}
+.shoot-card h4{font-family:'Space Grotesk';font-size:17px;font-weight:600;line-height:1.3;flex:1}
+.shoot-card .srow{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-dim);padding:5px 0}
+.shoot-card .srow svg{width:15px;height:15px;color:var(--text-faint);flex:none}
+.shoot-card .checklist{margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--line-soft)}
+.shoot-card .cl-item{display:flex;align-items:center;gap:8px;font-size:13px;padding:4px 0;color:var(--text-dim)}
+.shoot-card .cl-item.done{color:var(--text-faint);text-decoration:line-through}
+.shoot-card .sactions{position:absolute;top:var(--s4);right:var(--s4);display:flex;gap:6px;opacity:0;transition:opacity .15s var(--ease)}
+.shoot-card:hover .sactions{opacity:1}
+.st-planning{color:var(--text-dim);border-color:var(--line);background:var(--raised)}
+.st-ready{color:var(--indigo);border-color:rgba(124,156,255,.3);background:rgba(124,156,255,.08)}
+.st-shooting{color:var(--amber);border-color:rgba(255,178,62,.3);background:rgba(255,178,62,.08)}
+.st-completed-shoot{color:var(--mint);border-color:rgba(0,229,199,.3);background:rgba(0,229,199,.08)}
+
+/* ---- Shot List ---- */
+.shotlist{background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.shot-row{display:grid;grid-template-columns:36px 90px 1fr 100px 90px 70px 70px;gap:var(--s3);align-items:center;padding:12px var(--s5);border-bottom:1px solid var(--line-soft);font-size:13px;transition:background .12s var(--ease)}
+.shot-row:hover{background:var(--raised)}
+.shot-row.head{font-family:'JetBrains Mono';font-size:10px;letter-spacing:1px;color:var(--text-faint);text-transform:uppercase;background:var(--raised)}
+.shot-row.done .shot-desc{color:var(--text-faint);text-decoration:line-through}
+.shot-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--mint);cursor:pointer}
+.shot-type{font-family:'JetBrains Mono';font-size:10px;padding:3px 8px;border-radius:6px;text-align:center;background:rgba(124,156,255,.1);color:var(--indigo);border:1px solid rgba(124,156,255,.2)}
+.shot-mono{font-family:'JetBrains Mono';font-size:11px;color:var(--text-dim)}
+.shot-del{width:26px;height:26px;border-radius:6px;background:transparent;border:1px solid var(--line);color:var(--text-faint);cursor:pointer;display:grid;place-items:center;transition:all .15s var(--ease)}
+.shot-del:hover{border-color:var(--rose);color:var(--rose)}
+.shot-progress{font-family:'JetBrains Mono';font-size:12px;color:var(--text-dim);margin-left:auto}
+
+/* ---- Upload Planner ---- */
+.upload-row{display:flex;align-items:center;gap:var(--s4);background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4) var(--s5);margin-bottom:var(--s3);cursor:pointer;transition:border-color .15s var(--ease)}
+.upload-row:hover{border-color:#33405280}
+.upload-row .when{text-align:center;flex:none;width:64px}
+.upload-row .when .d{font-family:'Space Grotesk';font-size:22px;font-weight:700;line-height:1}
+.upload-row .when .m{font-family:'JetBrains Mono';font-size:10px;color:var(--text-faint);text-transform:uppercase}
+.upload-row .uinfo{flex:1;min-width:0}
+.upload-row .uinfo b{font-family:'Space Grotesk';font-size:15px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upload-row .uinfo .cap{font-size:12px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.upload-row .uactions{display:flex;gap:6px;opacity:0;transition:opacity .15s var(--ease)}
+.upload-row:hover .uactions{opacity:1}
+.ust-scheduled{color:var(--indigo);border-color:rgba(124,156,255,.3);background:rgba(124,156,255,.08)}
+.ust-ready{color:var(--mint);border-color:rgba(0,229,199,.3);background:rgba(0,229,199,.08)}
+.ust-published{color:var(--green);border-color:rgba(61,214,140,.3);background:rgba(61,214,140,.08)}
+.ust-draft{color:var(--text-dim);border-color:var(--line);background:var(--raised)}
+
+@media(max-width:980px){.kanban{grid-template-columns:repeat(3,1fr)}.studio{grid-template-columns:1fr}.shot-row{grid-template-columns:30px 70px 1fr 60px;font-size:12px}.shot-row .shot-cam,.shot-row .shot-lens,.shot-row .shot-dur{display:none}}
 @media(max-width:1100px){.context{display:none}}
 @media(max-width:720px){.workspace{padding:var(--s6) var(--s5)}.search{display:none}}
 </style>
@@ -310,23 +418,25 @@ button{font-family:inherit}
       <div class="lbl">Planning</div>
       <div class="nav-item" data-view="calendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Content Calendar</span></div>
       <div class="nav-item" data-view="ideas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg><span>Idea Vault</span></div>
-      <div class="nav-item" data-view="goals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Goals</span><span class="soon">SOON</span></div>
+      <div class="nav-item" data-view="goals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Goals</span></div>
     </div>
     <div class="nav-group">
       <div class="lbl">Creation</div>
-      <div class="nav-item" data-view="scripts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Script Studio</span><span class="soon">SOON</span></div>
-      <div class="nav-item" data-view="pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="18"/><rect x="10" y="3" width="5" height="12"/><rect x="17" y="3" width="4" height="8"/></svg><span>Editing Pipeline</span><span class="soon">SOON</span></div>
-      <div class="nav-item" data-view="uploads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4M8 8l4-4 4 4M4 20h16"/></svg><span>Upload Planner</span><span class="soon">SOON</span></div>
+      <div class="nav-item" data-view="scripts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Script Studio</span></div>
+      <div class="nav-item" data-view="shoots"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><span>Shoot Planner</span></div>
+      <div class="nav-item" data-view="shots"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18v13H3z"/><circle cx="12" cy="13" r="3.5"/><path d="M8 7l1.5-3h5L16 7"/></svg><span>Shot List</span></div>
+      <div class="nav-item" data-view="pipeline"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="18"/><rect x="10" y="3" width="5" height="12"/><rect x="17" y="3" width="4" height="8"/></svg><span>Editing Pipeline</span></div>
+      <div class="nav-item" data-view="uploads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4M8 8l4-4 4 4M4 20h16"/></svg><span>Upload Planner</span></div>
     </div>
     <div class="nav-group">
       <div class="lbl">Business</div>
-      <div class="nav-item" data-view="deals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1Z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span>Brand Deals</span><span class="soon">SOON</span></div>
+      <div class="nav-item" data-view="deals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1Z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span>Brand Deals</span></div>
       <div class="nav-item" data-view="finance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Creator Finance</span><span class="soon">SOON</span></div>
     </div>
     <div class="nav-group">
       <div class="lbl">Growth</div>
-      <div class="nav-item" data-view="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg><span>Analytics</span><span class="soon">SOON</span></div>
-      <div class="nav-item" data-view="growth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg><span>Growth Engine</span><span class="soon">SOON</span></div>
+      <div class="nav-item" data-view="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg><span>Analytics</span></div>
+      <div class="nav-item" data-view="growth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg><span>Growth Engine</span></div>
     </div>
     <div class="nav-group">
       <div class="lbl">Settings</div>
@@ -400,6 +510,40 @@ function seed(){
       {id:uid(),title:"Channel trailer v2",stage:"published",progress:100,priority:"low",editor:"Me",eta:"Live"}
     ]);
   }
+  if(!DB.get('goals')){
+    DB.set('goals',[
+      {id:uid(),title:"Reach 30K subscribers",cat:"Quarterly",current:24800,target:30000,deadline:"2026-09-30",reward:"New camera lens"},
+      {id:uid(),title:"Publish 20 videos this month",cat:"Monthly",current:18,target:20,deadline:"2026-06-30",reward:"Rest day"},
+      {id:uid(),title:"Hit $5K monthly revenue",cat:"Monthly",current:3420,target:5000,deadline:"2026-06-30",reward:"Upgrade editing PC"},
+      {id:uid(),title:"Land 10 brand deals this year",cat:"Yearly",current:4,target:10,deadline:"2026-12-31",reward:"Weekend trip"},
+      {id:uid(),title:"Read 12 books on storytelling",cat:"Personal",current:7,target:12,deadline:"2026-12-31",reward:"Bookstore spree"}
+    ]);
+  }
+  if(!DB.get('shoots')){
+    DB.set('shoots',[
+      {id:uid(),title:"Studio setup B-roll day",location:"Home studio",date:"2026-07-03",time:"10:00",status:"ready",equipment:"A7IV, 24-70mm, key light",checklist:[{t:"Charge batteries",d:true},{t:"Clear desk",d:true},{t:"Test audio levels",d:false},{t:"Set up second light",d:false}],notes:"Shoot the gear close-ups first while light is soft."},
+      {id:uid(),title:"Plateau retrospective talking head",location:"Office",date:"2026-07-06",time:"14:00",status:"planning",equipment:"A7IV, 35mm, lav mic",checklist:[{t:"Finalize script",d:true},{t:"Print teleprompter notes",d:false},{t:"Tidy background",d:false}],notes:"Need good eye-line. Window behind camera for soft fill."},
+      {id:uid(),title:"7 hooks rapid-fire Short",location:"Home studio",date:"2026-07-01",time:"09:00",status:"completed",equipment:"Phone, ring light",checklist:[{t:"Memorize 7 hooks",d:true},{t:"Vertical framing",d:true}],notes:"Wrapped. Footage already in pipeline."}
+    ]);
+  }
+  if(!DB.get('shots')){
+    DB.set('shots',[
+      {id:uid(),type:"Wide",desc:"Full desk + creator, establishing the space",cam:"A7IV",lens:"24mm",dur:"8s",done:true},
+      {id:uid(),type:"Talking Head",desc:"Creator addresses camera, the hook",cam:"A7IV",lens:"35mm",dur:"15s",done:true},
+      {id:uid(),type:"Close Up",desc:"Hands adjusting the key light",cam:"A7IV",lens:"50mm",dur:"5s",done:false},
+      {id:uid(),type:"B-roll",desc:"Camera panning across gear on desk",cam:"A7IV",lens:"24-70",dur:"6s",done:false},
+      {id:uid(),type:"Detail",desc:"Macro of record button being pressed",cam:"A7IV",lens:"90mm macro",dur:"3s",done:false},
+      {id:uid(),type:"POV",desc:"Creator's view sitting down at desk",cam:"GoPro",lens:"wide",dur:"4s",done:false}
+    ]);
+  }
+  if(!DB.get('uploads')){
+    DB.set('uploads',[
+      {id:uid(),title:"Why My Videos Stopped Growing",platform:"YouTube",date:"2026-07-08",time:"15:00",status:"scheduled",caption:"The honest story of my 3-month plateau — and the fix.",checklist:"Thumbnail ✓ · Title ✓ · Tags ✓ · End screen ⨯"},
+      {id:uid(),title:"7 Hooks That Doubled Retention",platform:"Shorts",date:"2026-07-02",time:"12:00",status:"ready",caption:"Steal these 7 hooks 🎣",checklist:"Thumbnail ✓ · Caption ✓"},
+      {id:uid(),title:"My $0 Home Studio Setup",platform:"YouTube",date:"2026-07-15",time:"15:00",status:"draft",caption:"You don't need expensive gear.",checklist:"Script ✓ · Filming pending"},
+      {id:uid(),title:"Daily posting recap",platform:"TikTok",date:"2026-06-28",time:"18:00",status:"published",caption:"30 days, here's what happened.",checklist:"Published ✓"}
+    ]);
+  }
   if(!DB.get('deals')){
     DB.set('deals',[
       {id:uid(),company:"SkillShare",contact:"Jordan Lee",email:"jordan@skillshare.com",payment:1200,deadline:"2026-07-15",status:"negotiating",notes:"60-sec integration, two-video package. Pushing for $1,500."},
@@ -430,7 +574,7 @@ function toast(title,msg){
 const WS=document.getElementById('workspace'), CTX=document.getElementById('context');
 function render(){
   WS.classList.remove('fade-in');void WS.offsetWidth;WS.classList.add('fade-in');
-  ({dashboard:renderDashboard,calendar:renderCalendar,ideas:renderIdeas,scripts:renderScripts,pipeline:renderPipeline,deals:renderDeals,settings:renderSettings}[view]||renderSoon)();
+  ({dashboard:renderDashboard,calendar:renderCalendar,ideas:renderIdeas,scripts:renderScripts,pipeline:renderPipeline,deals:renderDeals,settings:renderSettings,analytics:renderAnalytics,growth:renderGrowth,goals:renderGoals,shoots:renderShoots,shots:renderShots,uploads:renderUploads}[view]||renderSoon)();
   renderContext();
 }
 
@@ -766,6 +910,308 @@ function openDealModal(id){
   }, id?()=>{confirmModal('Delete this deal?','It leaves your pipeline.',()=>{DB.set('deals',DB.get('deals',[]).filter(x=>x.id!==id));renderDeals();toast('Deal deleted');});}:null);
 }
 function deleteDeal(id){confirmModal('Delete this deal?','It leaves your pipeline.',()=>{DB.set('deals',DB.get('deals',[]).filter(x=>x.id!==id));renderDeals();toast('Deal deleted');});}
+
+/* ===== shared chart tooltip ===== */
+let chartTip;
+function ensureTip(){if(!chartTip){chartTip=document.createElement('div');chartTip.className='chart-tip';document.body.appendChild(chartTip);}return chartTip;}
+function showTip(e,html){const t=ensureTip();t.innerHTML=html;t.style.opacity='1';t.style.left=(e.clientX+12)+'px';t.style.top=(e.clientY-10)+'px';}
+function hideTip(){if(chartTip)chartTip.style.opacity='0';}
+
+/* line+area chart from array of {label,value} */
+function lineChart(data,fmt){
+  const W=640,H=200,P=30;
+  const max=Math.max(...data.map(d=>d.value))*1.15||1;
+  const x=i=>P+(i*(W-P*2)/(data.length-1));
+  const y=v=>H-P-(v/max)*(H-P*2);
+  const pts=data.map((d,i)=>[x(i),y(d.value)]);
+  const line=pts.map((p,i)=>(i?'L':'M')+p[0]+' '+p[1]).join(' ');
+  const area=`M${pts[0][0]} ${H-P} `+pts.map(p=>'L'+p[0]+' '+p[1]).join(' ')+` L${pts[pts.length-1][0]} ${H-P} Z`;
+  let grid='';for(let g=0;g<=4;g++){const gy=P+g*(H-P*2)/4;grid+=`<line class="gl" x1="${P}" y1="${gy}" x2="${W-P}" y2="${gy}"/>`;}
+  const dots=data.map((d,i)=>`<g class="hot"><rect x="${x(i)-18}" y="${P}" width="36" height="${H-P}" fill="transparent" onmousemove="showTip(event,'<b>${(fmt?fmt(d.value):d.value)}</b><small>${d.label}</small>')" onmouseleave="hideTip()"/><circle class="dot" cx="${x(i)}" cy="${y(d.value)}" r="4"/></g>`).join('');
+  const labels=data.map((d,i)=>`<text class="axlbl" x="${x(i)}" y="${H-8}" text-anchor="middle">${d.label}</text>`).join('');
+  return `<svg class="chart-svg" viewBox="0 0 ${W} ${H}"><defs><linearGradient id="mintgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,229,199,.25)"/><stop offset="100%" stop-color="rgba(0,229,199,0)"/></linearGradient></defs>${grid}<path class="area" d="${area}"/><path class="linepath" d="${line}"/>${dots}${labels}</svg>`;
+}
+/* bar chart */
+function barChart(data,fmt){
+  const W=640,H=200,P=30;const max=Math.max(...data.map(d=>d.value))*1.15||1;
+  const bw=(W-P*2)/data.length*0.6;
+  let grid='';for(let g=0;g<=4;g++){const gy=P+g*(H-P*2)/4;grid+=`<line class="gl" x1="${P}" y1="${gy}" x2="${W-P}" y2="${gy}"/>`;}
+  const bars=data.map((d,i)=>{const bx=P+i*(W-P*2)/data.length+((W-P*2)/data.length-bw)/2;const bh=(d.value/max)*(H-P*2);return `<rect class="bar" x="${bx}" y="${H-P-bh}" width="${bw}" height="${bh}" rx="4" onmousemove="showTip(event,'<b>${fmt?fmt(d.value):d.value}</b><small>${d.label}</small>')" onmouseleave="hideTip()"/><text class="axlbl" x="${bx+bw/2}" y="${H-8}" text-anchor="middle">${d.label}</text>`;}).join('');
+  return `<svg class="chart-svg" viewBox="0 0 ${W} ${H}">${grid}${bars}</svg>`;
+}
+/* donut from [{label,value,color}] */
+function donut(data){
+  const total=data.reduce((s,d)=>s+d.value,0)||1;const R=70,C=2*Math.PI*R;let off=0;
+  const segs=data.map(d=>{const frac=d.value/total;const seg=`<circle r="${R}" cx="90" cy="90" fill="none" stroke="${d.color}" stroke-width="22" stroke-dasharray="${frac*C} ${C}" stroke-dashoffset="${-off*C}" transform="rotate(-90 90 90)"/>`;off+=frac;return seg;}).join('');
+  return `<svg width="180" height="180" viewBox="0 0 180 180">${segs}<circle r="48" cx="90" cy="90" fill="var(--panel)"/></svg>`;
+}
+
+/* ----- Analytics ----- */
+function renderAnalytics(){
+  const views=[{label:'Jan',value:420},{label:'Feb',value:510},{label:'Mar',value:680},{label:'Apr',value:740},{label:'May',value:1020},{label:'Jun',value:1240}];
+  const uploads=[{label:'Mon',value:2},{label:'Tue',value:1},{label:'Wed',value:3},{label:'Thu',value:2},{label:'Fri',value:4},{label:'Sat',value:1},{label:'Sun',value:0}];
+  const platforms=[{label:'YouTube',value:14200,color:'var(--rose)'},{label:'TikTok',value:6400,color:'var(--indigo)'},{label:'Instagram',value:3100,color:'var(--amber)'},{label:'Shorts',value:1100,color:'var(--mint)'}];
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Analytics</h1><p>Turn numbers into decisions.</p></div></div>
+   <div class="grid metric-grid">
+     ${metric('Views (30d)','1.24M','▲ 12.4%','up')}
+     ${metric('Watch time','82.4K hrs','▲ 6.1%','up')}
+     ${metric('CTR','5.8%','▲ 0.4pt','up')}
+     ${metric('Retention','41%','▼ 2pt','dn')}
+     ${metric('Subscribers','24.8K','▲ 4.2%','up')}
+   </div>
+   <div class="chart-card"><h3>Monthly views<span class="tag">last 6 months · thousands</span></h3>${lineChart(views,v=>v+'K')}</div>
+   <div class="chart-card"><h3>Uploads this week<span class="tag">hover for detail</span></h3>${barChart(uploads,v=>v+' uploads')}</div>
+   <div class="chart-card"><h3>Followers by platform<span class="tag">24.8K total</span></h3>
+     <div class="donut-wrap">${donut(platforms)}
+       <div class="donut-legend">${platforms.map(p=>`<div class="li"><span class="sw" style="background:${p.color}"></span>${p.label}<span class="amt">${p.value.toLocaleString()}</span></div>`).join('')}</div>
+     </div>
+   </div>`;
+}
+function metric(k,v,d,dir){return `<div class="metric"><div class="k">${k}</div><div class="v">${v}</div><div class="d ${dir}">${d} vs last period</div></div>`}
+
+/* ----- Growth Engine ----- */
+function renderGrowth(){
+  const goals=DB.get('goals',[]);
+  const rings=[
+    {pct:Math.round(24800/30000*100),lbl:'Subscriber goal',sub:'24.8K / 30K'},
+    {pct:90,lbl:'Upload consistency',sub:'18 / 20 this month'},
+    {pct:Math.round(3420/5000*100),lbl:'Revenue goal',sub:'$3.4K / $5K'},
+    {pct:100,lbl:'Publishing streak',sub:'6 days · personal best'}
+  ];
+  const milestones=[
+    {done:true,icon:'🎉',title:'First 10K subscribers',sub:'Reached March 2026'},
+    {done:true,icon:'💰',title:'First $1K month',sub:'Reached April 2026'},
+    {done:true,icon:'🤝',title:'First brand deal',sub:'SkillShare · May 2026'},
+    {done:false,icon:'🚀',title:'30K subscribers',sub:'82% there'},
+    {done:false,icon:'🏆',title:'1M monthly views',sub:'In progress'}
+  ];
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Growth Engine</h1><p>The long game. Where you've been and where you're headed.</p></div></div>
+   <div class="grid ring-grid">${rings.map(ringCard).join('')}</div>
+   <div class="chart-card" style="margin-top:24px"><h3>Milestones</h3>
+     ${milestones.map(m=>`<div class="milestone ${m.done?'done':'pending'}"><div class="badge">${m.done?m.icon:'○'}</div><div class="mtext"><b>${m.title}</b><small>${m.sub}</small></div></div>`).join('')}
+   </div>`;
+  // animate rings after paint
+  requestAnimationFrame(()=>document.querySelectorAll('.rfg').forEach(c=>{const len=+c.dataset.len;c.style.strokeDashoffset=c.dataset.off;}));
+}
+function ringCard(r){
+  const R=42,C=2*Math.PI*R;const off=C-(Math.min(r.pct,100)/100)*C;
+  return `<div class="ring-card">
+    <svg width="110" height="110" viewBox="0 0 110 110"><circle class="rbg" cx="55" cy="55" r="${R}"/><circle class="rfg" cx="55" cy="55" r="${R}" stroke-dasharray="${C}" stroke-dashoffset="${C}" data-off="${off}"/></svg>
+    <div class="pct">${r.pct}%</div><div class="lbl">${r.lbl}</div><div class="sub">${r.sub}</div></div>`;
+}
+
+/* ----- Goals ----- */
+let goalFilter='All';
+function renderGoals(){
+  let goals=DB.get('goals',[]);
+  const cats=['All','Monthly','Quarterly','Yearly','Personal','Business'];
+  const shown=goalFilter==='All'?goals:goals.filter(g=>g.cat===goalFilter);
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Goals</h1><p>${goals.length} goals in motion. Keep the momentum.</p></div>
+     <div class="right"><button class="btn btn-primary" onclick="openGoalModal()">＋ New goal</button></div></div>
+   <div class="goal-filter">${cats.map(c=>`<button class="gfilter-btn ${goalFilter===c?'active':''}" onclick="goalFilter='${c}';renderGoals()">${c}</button>`).join('')}</div>
+   ${shown.length?`<div class="grid goal-grid">${shown.map(goalCard).join('')}</div>`:emptyState('Aim at something','Set your first goal and watch the progress fill as you go.','New goal','openGoalModal()')}`;
+}
+function goalCard(g){
+  const pct=Math.min(Math.round((g.current/g.target)*100),100);
+  const fmt=n=>n>=1000?(n/1000).toFixed(n%1000?1:0)+'K':n;
+  return `<div class="card hover goal-card" onclick="openGoalModal('${g.id}')">
+    <div class="gactions">
+      <button class="mini-btn" onclick="event.stopPropagation();openGoalModal('${g.id}')" title="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
+      <button class="mini-btn del" onclick="event.stopPropagation();deleteGoal('${g.id}')" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button>
+    </div>
+    <div class="gcat">${g.cat}</div><h4>${esc(g.title)}</h4>
+    <div class="gbar"><i style="width:${pct}%"></i></div>
+    <div class="gmeta"><span>${fmt(g.current)} / ${fmt(g.target)}</span><span>${pct}%</span></div>
+    ${g.reward?`<div class="greward">🎁 ${esc(g.reward)}</div>`:''}
+  </div>`;
+}
+function openGoalModal(id){
+  const g=id?DB.get('goals',[]).find(x=>x.id===id):null;
+  const cats=['Monthly','Quarterly','Yearly','Personal','Business'];
+  openModal(id?'Edit goal':'New goal',`
+    <div class="field" id="f_gtitle"><label>Goal</label><input id="g_title" value="${g?esc(g.title):''}" placeholder="e.g. Reach 30K subscribers"><span class="err">Name your goal.</span></div>
+    <div class="row2">
+      <div class="field"><label>Category</label><select id="g_cat">${cats.map(c=>`<option ${g&&g.cat===c?'selected':''}>${c}</option>`).join('')}</select></div>
+      <div class="field"><label>Deadline</label><input type="date" id="g_deadline" value="${g?g.deadline||'':''}"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Current</label><input type="number" id="g_current" value="${g?g.current:0}"></div>
+      <div class="field"><label>Target</label><input type="number" id="g_target" value="${g?g.target:''}" placeholder="100"></div>
+    </div>
+    <div class="field"><label>Reward when you hit it</label><input id="g_reward" value="${g?esc(g.reward||''):''}" placeholder="e.g. New camera lens"></div>
+  `,()=>{
+    const title=val('g_title').trim();
+    if(!title){document.getElementById('f_gtitle').classList.add('invalid');return false;}
+    const list=DB.get('goals',[]);
+    const data={title,cat:val('g_cat'),deadline:val('g_deadline'),current:+val('g_current')||0,target:+val('g_target')||1,reward:val('g_reward')};
+    const wasComplete=g&&g.current>=g.target;
+    if(g)Object.assign(g,data);else list.push({id:uid(),...data});
+    DB.set('goals',list);renderGoals();
+    const nowComplete=data.current>=data.target;
+    if(nowComplete&&!wasComplete)toast('Goal smashed! 🎉','Incredible. Time to claim that reward.');
+    else toast(g?'Goal updated':'Goal set','One more thing to aim at.');
+    return true;
+  }, id?()=>{confirmModal('Delete this goal?','It leaves your board.',()=>{DB.set('goals',DB.get('goals',[]).filter(x=>x.id!==id));renderGoals();toast('Goal deleted');});}:null);
+}
+function deleteGoal(id){confirmModal('Delete this goal?','It leaves your board.',()=>{DB.set('goals',DB.get('goals',[]).filter(x=>x.id!==id));renderGoals();toast('Goal deleted');});}
+
+/* ----- Shoot Planner ----- */
+const SHOOT_ST=['planning','ready','shooting','completed'];
+function renderShoots(){
+  const shoots=DB.get('shoots',[]);
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Shoot Planner</h1><p>Plan every filming day so nothing's forgotten on set.</p></div>
+     <div class="right"><button class="btn btn-primary" onclick="openShootModal()">＋ Plan a shoot</button></div></div>
+   ${shoots.length?`<div class="grid shoot-grid">${shoots.map(shootCard).join('')}</div>`:emptyState('Lights, camera…','Plan your first shoot. Location, gear, checklist — all in one place.','Plan a shoot','openShootModal()')}`;
+}
+function shootCard(s){
+  const stcls=s.status==='completed'?'st-completed-shoot':'st-'+s.status;
+  const done=(s.checklist||[]).filter(c=>c.d).length, total=(s.checklist||[]).length;
+  return `<div class="card hover shoot-card" onclick="openShootModal('${s.id}')">
+    <div class="sactions">
+      <button class="mini-btn" onclick="event.stopPropagation();openShootModal('${s.id}')" title="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
+      <button class="mini-btn del" onclick="event.stopPropagation();deleteShoot('${s.id}')" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button>
+    </div>
+    <div class="shead"><h4>${esc(s.title)}</h4></div>
+    <span class="pill ${stcls}">${s.status}</span>
+    <div class="srow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>${esc(s.location||'—')}</div>
+    <div class="srow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${s.date?fmtDate(s.date):'—'} ${s.time||''}</div>
+    <div class="srow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>${esc(s.equipment||'—')}</div>
+    ${total?`<div class="checklist">${(s.checklist||[]).map((c,i)=>`<div class="cl-item ${c.d?'done':''}"><input type="checkbox" ${c.d?'checked':''} onclick="event.stopPropagation();toggleShootCheck('${s.id}',${i})" style="width:15px;height:15px;accent-color:var(--mint)">${esc(c.t)}</div>`).join('')}<div class="shot-progress" style="margin-top:8px">${done}/${total} ready</div></div>`:''}
+    ${s.notes?`<div class="greward" style="margin-top:12px">📝 ${esc(s.notes)}</div>`:''}
+  </div>`;
+}
+function toggleShootCheck(id,i){const l=DB.get('shoots',[]);const s=l.find(x=>x.id===id);if(s&&s.checklist[i]){s.checklist[i].d=!s.checklist[i].d;DB.set('shoots',l);renderShoots();}}
+function openShootModal(id){
+  const s=id?DB.get('shoots',[]).find(x=>x.id===id):null;
+  openModal(id?'Edit shoot':'Plan a shoot',`
+    <div class="field" id="f_stitle"><label>What are you shooting?</label><input id="sh_title" value="${s?esc(s.title):''}" placeholder="e.g. Studio setup B-roll day"><span class="err">Add a title.</span></div>
+    <div class="row2">
+      <div class="field"><label>Location</label><input id="sh_loc" value="${s?esc(s.location||''):''}" placeholder="Home studio"></div>
+      <div class="field"><label>Status</label><select id="sh_status">${SHOOT_ST.map(st=>`<option ${s&&s.status===st?'selected':''}>${st}</option>`).join('')}</select></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Date</label><input type="date" id="sh_date" value="${s?s.date||'':''}"></div>
+      <div class="field"><label>Time</label><input type="time" id="sh_time" value="${s?s.time||'':''}"></div>
+    </div>
+    <div class="field"><label>Equipment</label><input id="sh_equip" value="${s?esc(s.equipment||''):''}" placeholder="Camera, lens, lights, mic"></div>
+    <div class="field"><label>Checklist (one item per line)</label><textarea id="sh_check" placeholder="Charge batteries&#10;Test audio">${s?(s.checklist||[]).map(c=>c.t).join('\n'):''}</textarea></div>
+    <div class="field"><label>Notes</label><textarea id="sh_notes" placeholder="Lighting notes, reminders…">${s?esc(s.notes||''):''}</textarea></div>
+  `,()=>{
+    const title=val('sh_title').trim();
+    if(!title){document.getElementById('f_stitle').classList.add('invalid');return false;}
+    const oldChecks=s?s.checklist||[]:[];
+    const newChecks=val('sh_check').split('\n').map(t=>t.trim()).filter(Boolean).map(t=>{const old=oldChecks.find(c=>c.t===t);return{t,d:old?old.d:false};});
+    const list=DB.get('shoots',[]);
+    const data={title,location:val('sh_loc'),status:val('sh_status'),date:val('sh_date'),time:val('sh_time'),equipment:val('sh_equip'),checklist:newChecks,notes:val('sh_notes')};
+    if(s)Object.assign(s,data);else list.push({id:uid(),...data});
+    DB.set('shoots',list);renderShoots();toast(s?'Shoot updated':'Shoot planned','Ready when you are.');return true;
+  }, id?()=>{confirmModal('Delete this shoot?','Removed from your plan.',()=>{DB.set('shoots',DB.get('shoots',[]).filter(x=>x.id!==id));renderShoots();toast('Shoot deleted');});}:null);
+}
+function deleteShoot(id){confirmModal('Delete this shoot?','Removed from your plan.',()=>{DB.set('shoots',DB.get('shoots',[]).filter(x=>x.id!==id));renderShoots();toast('Shoot deleted');});}
+
+/* ----- Shot List ----- */
+const SHOT_TYPES=['Wide','Medium','Close Up','POV','Drone','B-roll','Talking Head','Detail','Custom'];
+function renderShots(){
+  const shots=DB.get('shots',[]);
+  const done=shots.filter(s=>s.done).length;
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Shot List</h1><p>Every camera shot, checked off as you capture it.</p></div>
+     <div class="right"><span class="shot-progress" style="align-self:center">${done}/${shots.length} captured</span><button class="btn btn-primary" onclick="openShotModal()">＋ Add shot</button></div></div>
+   ${shots.length?`<div class="shotlist">
+     <div class="shot-row head"><span></span><span>Type</span><span>Description</span><span class="shot-cam">Camera</span><span class="shot-lens">Lens</span><span class="shot-dur">Length</span><span></span></div>
+     ${shots.map(shotRow).join('')}
+   </div>`:emptyState('Map every shot','List the shots you need before you film, then tick them off on set.','Add shot','openShotModal()')}`;
+}
+function shotRow(s){
+  return `<div class="shot-row ${s.done?'done':''}">
+    <input type="checkbox" ${s.done?'checked':''} onchange="toggleShot('${s.id}')">
+    <span class="shot-type">${esc(s.type)}</span>
+    <span class="shot-desc" onclick="openShotModal('${s.id}')" style="cursor:pointer">${esc(s.desc)}</span>
+    <span class="shot-mono shot-cam">${esc(s.cam||'—')}</span>
+    <span class="shot-mono shot-lens">${esc(s.lens||'—')}</span>
+    <span class="shot-mono shot-dur">${esc(s.dur||'—')}</span>
+    <button class="shot-del" onclick="deleteShot('${s.id}')" title="Delete"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>`;
+}
+function toggleShot(id){const l=DB.get('shots',[]);const s=l.find(x=>x.id===id);if(s){s.done=!s.done;DB.set('shots',l);renderShots();}}
+function openShotModal(id){
+  const s=id?DB.get('shots',[]).find(x=>x.id===id):null;
+  openModal(id?'Edit shot':'Add shot',`
+    <div class="row2">
+      <div class="field"><label>Shot type</label><select id="so_type">${SHOT_TYPES.map(t=>`<option ${s&&s.type===t?'selected':''}>${t}</option>`).join('')}</select></div>
+      <div class="field"><label>Length</label><input id="so_dur" value="${s?esc(s.dur||''):''}" placeholder="e.g. 5s"></div>
+    </div>
+    <div class="field" id="f_sodesc"><label>Description</label><input id="so_desc" value="${s?esc(s.desc||''):''}" placeholder="What's in frame?"><span class="err">Describe the shot.</span></div>
+    <div class="row2">
+      <div class="field"><label>Camera</label><input id="so_cam" value="${s?esc(s.cam||''):''}" placeholder="A7IV"></div>
+      <div class="field"><label>Lens</label><input id="so_lens" value="${s?esc(s.lens||''):''}" placeholder="35mm"></div>
+    </div>
+  `,()=>{
+    const desc=val('so_desc').trim();
+    if(!desc){document.getElementById('f_sodesc').classList.add('invalid');return false;}
+    const list=DB.get('shots',[]);
+    const data={type:val('so_type'),desc,cam:val('so_cam'),lens:val('so_lens'),dur:val('so_dur')};
+    if(s)Object.assign(s,data);else list.push({id:uid(),done:false,...data});
+    DB.set('shots',list);renderShots();toast(s?'Shot updated':'Shot added','On the list.');return true;
+  }, id?()=>{confirmModal('Delete this shot?','Removed from the list.',()=>{DB.set('shots',DB.get('shots',[]).filter(x=>x.id!==id));renderShots();toast('Shot deleted');});}:null);
+}
+function deleteShot(id){confirmModal('Delete this shot?','Removed from the list.',()=>{DB.set('shots',DB.get('shots',[]).filter(x=>x.id!==id));renderShots();toast('Shot deleted');});}
+
+/* ----- Upload Planner ----- */
+const UP_ST=['draft','scheduled','ready','published'];
+function renderUploads(){
+  let uploads=DB.get('uploads',[]).slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>Upload Planner</h1><p>Never miss a publishing date again.</p></div>
+     <div class="right"><button class="btn btn-primary" onclick="openUploadModal()">＋ Plan upload</button></div></div>
+   ${uploads.length?uploads.map(uploadRow).join(''):emptyState('Plan your next drop','Schedule an upload and keep every caption, thumbnail, and checklist in one spot.','Plan upload','openUploadModal()')}`;
+}
+function uploadRow(u){
+  const d=u.date?new Date(u.date+'T00:00'):null;
+  const pc=PLAT[u.platform]?PLAT[u.platform].cls:'per';
+  return `<div class="upload-row" onclick="openUploadModal('${u.id}')">
+    <div class="when"><div class="d">${d?d.getDate():'—'}</div><div class="m">${d?d.toLocaleDateString('en-US',{month:'short'}):''}</div></div>
+    <div class="uinfo"><b>${esc(u.title)}</b><div class="cap">${esc(u.caption||'')}</div>
+      <div style="margin-top:6px;display:flex;gap:6px;align-items:center"><span class="pill p-${pc}">${u.platform}</span><span class="pill ust-${u.status}">${u.status}</span><span class="shot-mono">${u.time||''}</span></div>
+    </div>
+    <div class="uactions">
+      <button class="mini-btn" onclick="event.stopPropagation();openUploadModal('${u.id}')" title="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button>
+      <button class="mini-btn del" onclick="event.stopPropagation();deleteUpload('${u.id}')" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button>
+    </div>
+  </div>`;
+}
+function openUploadModal(id){
+  const u=id?DB.get('uploads',[]).find(x=>x.id===id):null;
+  openModal(id?'Edit upload':'Plan upload',`
+    <div class="field" id="f_utitle"><label>Title</label><input id="u_title" value="${u?esc(u.title):''}" placeholder="e.g. Why my videos stopped growing"><span class="err">Add a title.</span></div>
+    <div class="row2">
+      <div class="field"><label>Platform</label><select id="u_plat">${Object.keys(PLAT).map(p=>`<option ${u&&u.platform===p?'selected':''}>${p}</option>`).join('')}</select></div>
+      <div class="field"><label>Status</label><select id="u_status">${UP_ST.map(st=>`<option ${u&&u.status===st?'selected':''}>${st}</option>`).join('')}</select></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Date</label><input type="date" id="u_date" value="${u?u.date||'':''}"></div>
+      <div class="field"><label>Time</label><input type="time" id="u_time" value="${u?u.time||'':''}"></div>
+    </div>
+    <div class="field"><label>Caption</label><textarea id="u_caption" placeholder="The caption / description…">${u?esc(u.caption||''):''}</textarea></div>
+    <div class="field"><label>Pre-publish checklist</label><input id="u_check" value="${u?esc(u.checklist||''):''}" placeholder="Thumbnail · Title · Tags · End screen"></div>
+  `,()=>{
+    const title=val('u_title').trim();
+    if(!title){document.getElementById('f_utitle').classList.add('invalid');return false;}
+    const list=DB.get('uploads',[]);
+    const wasPublished=u&&u.status==='published';
+    const data={title,platform:val('u_plat'),status:val('u_status'),date:val('u_date'),time:val('u_time'),caption:val('u_caption'),checklist:val('u_check')};
+    if(u)Object.assign(u,data);else list.push({id:uid(),...data});
+    DB.set('uploads',list);renderUploads();renderContext();
+    if(data.status==='published'&&!wasPublished)toast('Published! 🎉','Live and out in the world.');
+    else toast(u?'Upload updated':'Upload planned','Locked into your schedule.');
+    return true;
+  }, id?()=>{confirmModal('Delete this upload?','Removed from your plan.',()=>{DB.set('uploads',DB.get('uploads',[]).filter(x=>x.id!==id));renderUploads();renderContext();toast('Upload deleted');});}:null);
+}
+function deleteUpload(id){confirmModal('Delete this upload?','Removed from your plan.',()=>{DB.set('uploads',DB.get('uploads',[]).filter(x=>x.id!==id));renderUploads();renderContext();toast('Upload deleted');});}
 
 /* ----- Profile / Settings ----- */
 function profile(){return DB.get('profile',{name:'Sajina',handle:'@sajina',role:'Content Creator'})}
