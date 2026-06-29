@@ -451,7 +451,39 @@ button{font-family:inherit}
 .fin-del{width:26px;height:26px;border-radius:6px;background:transparent;border:1px solid var(--line);color:var(--text-faint);cursor:pointer;display:grid;place-items:center;transition:all .15s var(--ease)}
 .fin-del:hover{border-color:var(--rose);color:var(--rose)}
 
-@media(max-width:980px){.kanban{grid-template-columns:repeat(3,1fr)}.studio{grid-template-columns:1fr}.shot-row{grid-template-columns:30px 70px 1fr 60px;font-size:12px}.shot-row .shot-cam,.shot-row .shot-lens,.shot-row .shot-dur{display:none}.music-row{grid-template-columns:40px 1fr 80px 36px}.music-row .m-genre,.music-row .m-dur,.music-row .m-fav{display:none}}
+/* ---- AI Assistant ---- */
+.ai-layout{display:grid;grid-template-columns:1fr 280px;gap:var(--s5);height:calc(100vh - 200px);min-height:480px}
+.ai-main{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+.ai-stream{flex:1;overflow-y:auto;padding:var(--s6);display:flex;flex-direction:column;gap:var(--s4)}
+.ai-msg{max-width:82%;padding:12px var(--s4);border-radius:var(--r);font-size:14px;line-height:1.55;white-space:pre-wrap}
+.ai-msg.user{align-self:flex-end;background:var(--mint);color:var(--mint-deep);border-bottom-right-radius:4px}
+.ai-msg.bot{align-self:flex-start;background:var(--raised);border:1px solid var(--line);border-bottom-left-radius:4px}
+.ai-msg.bot b{color:var(--mint);font-family:'Space Grotesk'}
+.ai-greeting{align-self:center;text-align:center;color:var(--text-dim);font-size:13px;max-width:420px;padding:var(--s5) 0}
+.ai-greeting .av{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--mint),var(--indigo));display:grid;place-items:center;margin:0 auto var(--s4);color:var(--mint-deep)}
+.ai-typing{align-self:flex-start;display:flex;gap:5px;padding:14px var(--s4);background:var(--raised);border:1px solid var(--line);border-radius:var(--r)}
+.ai-typing i{width:7px;height:7px;border-radius:50%;background:var(--text-faint);animation:blink 1.2s var(--ease) infinite}
+.ai-typing i:nth-child(2){animation-delay:.2s} .ai-typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+.ai-input{display:flex;gap:var(--s3);padding:var(--s4);border-top:1px solid var(--line)}
+.ai-input input{flex:1;background:var(--raised);border:1px solid var(--line);border-radius:var(--r);padding:11px 14px;color:var(--text);font-size:14px;font-family:inherit;transition:border-color .15s var(--ease),box-shadow .15s var(--ease)}
+.ai-input input:focus{outline:none;border-color:var(--mint);box-shadow:var(--glow)}
+.ai-send{width:44px;height:44px;border-radius:var(--r);background:var(--mint);color:var(--mint-deep);border:none;cursor:pointer;display:grid;place-items:center;flex:none;transition:transform .12s var(--ease)}
+.ai-send:hover{transform:translateY(-1px)}
+.ai-side{display:flex;flex-direction:column;gap:var(--s4);overflow-y:auto}
+.ai-side h3{font-family:'Space Grotesk';font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);font-weight:600;margin-bottom:var(--s2)}
+.ai-action{text-align:left;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:11px var(--s4);color:var(--text);font-size:13px;cursor:pointer;transition:all .15s var(--ease);display:flex;align-items:center;gap:10px;margin-bottom:var(--s2)}
+.ai-action:hover{border-color:var(--mint);color:var(--mint);transform:translateX(2px)}
+.ai-action span.ic{font-size:15px}
+.ai-keybox{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4)}
+.ai-keybox .status{font-family:'JetBrains Mono';font-size:11px;display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.ai-keybox .status::before{content:"";width:7px;height:7px;border-radius:50%}
+.ai-keybox .status.offline{color:var(--text-dim)} .ai-keybox .status.offline::before{background:var(--text-faint)}
+.ai-keybox .status.online{color:var(--mint)} .ai-keybox .status.online::before{background:var(--mint);box-shadow:0 0 8px var(--mint)}
+.ai-keybox p{font-size:11px;color:var(--text-faint);line-height:1.5;margin-bottom:8px}
+.ai-keybox input{width:100%;background:var(--raised);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 10px;color:var(--text);font-size:12px;font-family:'JetBrains Mono';margin-bottom:8px}
+
+@media(max-width:980px){.kanban{grid-template-columns:repeat(3,1fr)}.studio{grid-template-columns:1fr}.shot-row{grid-template-columns:30px 70px 1fr 60px;font-size:12px}.shot-row .shot-cam,.shot-row .shot-lens,.shot-row .shot-dur{display:none}.music-row{grid-template-columns:40px 1fr 80px 36px}.music-row .m-genre,.music-row .m-dur,.music-row .m-fav{display:none}.ai-layout{grid-template-columns:1fr;height:auto}.ai-side{flex-direction:row;flex-wrap:wrap}}
 /* hamburger hidden on desktop; sidebar is a fixed drawer on mobile */
 .menu-toggle{display:none;flex:none}
 .sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(5,7,11,.6);backdrop-filter:blur(2px);z-index:39}
@@ -501,6 +533,7 @@ button{font-family:inherit}
     <div class="nav-group">
       <div class="lbl">Workspace</div>
       <div class="nav-item active" data-view="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg><span>Command Center</span></div>
+      <div class="nav-item" data-view="assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/><circle cx="12" cy="12" r="4"/></svg><span>AI Assistant</span></div>
       <div class="nav-item" data-view="daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Daily Execution</span></div>
     </div>
     <div class="nav-group">
@@ -702,7 +735,7 @@ function toast(title,msg){
 const WS=document.getElementById('workspace'), CTX=document.getElementById('context');
 function render(){
   WS.classList.remove('fade-in');void WS.offsetWidth;WS.classList.add('fade-in');
-  ({dashboard:renderDashboard,calendar:renderCalendar,ideas:renderIdeas,scripts:renderScripts,pipeline:renderPipeline,deals:renderDeals,settings:renderSettings,analytics:renderAnalytics,growth:renderGrowth,goals:renderGoals,shoots:renderShoots,shots:renderShots,uploads:renderUploads,music:renderMusic,thumbs:renderThumbs,daily:renderDaily,finance:renderFinance}[view]||renderSoon)();
+  ({dashboard:renderDashboard,calendar:renderCalendar,ideas:renderIdeas,scripts:renderScripts,pipeline:renderPipeline,deals:renderDeals,settings:renderSettings,analytics:renderAnalytics,growth:renderGrowth,goals:renderGoals,shoots:renderShoots,shots:renderShots,uploads:renderUploads,music:renderMusic,thumbs:renderThumbs,daily:renderDaily,finance:renderFinance,assistant:renderAssistant}[view]||renderSoon)();
   renderContext();
 }
 
@@ -1595,9 +1628,117 @@ function finSwapCats(type,selected){
 }
 function deleteFin(id){confirmModal('Delete this entry?','Removed from your books.',()=>{DB.set('finance',DB.get('finance',[]).filter(x=>x.id!==id));renderFinance();toast('Entry deleted');});}
 
+/* ===== AI Creative Assistant ===== */
+let aiHistory=DB.get('ai_history',[]);
+function renderAssistant(){
+  const hasKey=!!DB.get('ai_key','');
+  WS.innerHTML=`
+   <div class="page-head"><div><h1>AI Assistant</h1><p>Your creative producer — works offline, knows your studio.</p></div></div>
+   <div class="ai-layout">
+     <div class="ai-main">
+       <div class="ai-stream" id="aiStream"></div>
+       <div class="ai-input">
+         <input id="aiInput" placeholder="Ask for ideas, hooks, a plan — or how you're doing…" autocomplete="off">
+         <button class="ai-send" onclick="aiSend()" title="Send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4Z"/></svg></button>
+       </div>
+     </div>
+     <div class="ai-side">
+       <div><h3>Try asking</h3>
+         ${aiQuickAction('💡','Give me 5 video ideas')}
+         ${aiQuickAction('🎣','Write hooks for my next video')}
+         ${aiQuickAction('📊','How am I doing this month?')}
+         ${aiQuickAction('🗓','What should I work on today?')}
+         ${aiQuickAction('🏷','Caption + hashtags for a post')}
+         ${aiQuickAction('🔁','Repurpose my last video')}
+       </div>
+       <div class="ai-keybox">
+         <div class="status ${hasKey?'online':'offline'}">${hasKey?'Connected · real AI':'Offline coach · local'}</div>
+         <p>The coach works fully offline using your AzMix data. To upgrade to live AI generation, add your own Anthropic API key — stored only in this browser.</p>
+         <input id="aiKey" type="password" placeholder="sk-ant-… (optional)" value="${hasKey?'••••••••••••':''}">
+         <button class="btn btn-ghost" style="width:100%;font-size:13px" onclick="saveAiKey()">${hasKey?'Update key':'Save key'}</button>
+       </div>
+     </div>
+   </div>`;
+  const stream=document.getElementById('aiStream');
+  if(aiHistory.length){stream.innerHTML=aiHistory.map(m=>`<div class="ai-msg ${m.role}">${m.role==='bot'?m.text:esc(m.text)}</div>`).join('');}
+  else{stream.innerHTML=`<div class="ai-greeting"><div class="av"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/><circle cx="12" cy="12" r="4"/></svg></div><b style="font-family:Space Grotesk;color:var(--text);display:block;font-size:16px;margin-bottom:6px">Hey ${esc(profileName())} 👋</b>I'm your creative producer. Ask me for ideas, hooks, captions, or a plan — or just ask how your channel's doing. I'll use what's actually in your AzMix studio.</div>`;}
+  stream.scrollTop=stream.scrollHeight;
+  const inp=document.getElementById('aiInput');
+  inp.onkeydown=e=>{if(e.key==='Enter')aiSend();};inp.focus();
+}
+function aiQuickAction(ic,text){return `<button class="ai-action" onclick="aiPrompt('${esc(text)}')"><span class="ic">${ic}</span>${text}</button>`;}
+function aiPrompt(text){const inp=document.getElementById('aiInput');if(inp){inp.value=text;aiSend();}}
+function saveAiKey(){
+  const v=document.getElementById('aiKey').value.trim();
+  if(v && !v.startsWith('•')){DB.set('ai_key',v);toast('Key saved','Stored only in this browser.');}
+  renderAssistant();
+}
+function aiSend(){
+  const inp=document.getElementById('aiInput');const text=inp.value.trim();if(!text)return;
+  inp.value='';
+  aiHistory.push({role:'user',text});
+  const stream=document.getElementById('aiStream');
+  if(aiHistory.length===1)stream.innerHTML='';
+  stream.insertAdjacentHTML('beforeend',`<div class="ai-msg user">${esc(text)}</div>`);
+  const typing=document.createElement('div');typing.className='ai-typing';typing.innerHTML='<i></i><i></i><i></i>';
+  stream.appendChild(typing);stream.scrollTop=stream.scrollHeight;
+  setTimeout(()=>{
+    typing.remove();
+    const reply=aiRespond(text);
+    aiHistory.push({role:'bot',text:reply});
+    DB.set('ai_history',aiHistory.slice(-40));
+    stream.insertAdjacentHTML('beforeend',`<div class="ai-msg bot">${reply}</div>`);
+    stream.scrollTop=stream.scrollHeight;
+  },650);
+}
+/* the local coach brain — reads real data, pattern-matches intent */
+function aiRespond(q){
+  const s=q.toLowerCase();
+  const ideas=DB.get('ideas',[]),deals=DB.get('deals',[]),pipe=DB.get('pipeline',[]),goals=DB.get('goals',[]),daily=DB.get('daily',[]),uploads=DB.get('uploads',[]);
+  const pick=arr=>arr[Math.floor(Math.random()*arr.length)];
+  // progress insight
+  if(/how am i|how.*doing|progress|insight|review|stats/.test(s)){
+    const openDeals=deals.filter(d=>['lead','negotiating','approved'].includes(d.status)).length;
+    const editing=pipe.filter(p=>p.stage!=='published').length;
+    const topGoal=goals.sort((a,b)=>(b.current/b.target)-(a.current/a.target))[0];
+    return `Here's your studio at a glance:\n\n<b>Pipeline:</b> ${editing} video${editing!==1?'s':''} in production right now.\n<b>Deals:</b> ${openDeals} active in your pipeline.\n<b>Ideas:</b> ${ideas.length} captured and ready to develop.\n${topGoal?`<b>Closest goal:</b> "${topGoal.title}" — ${Math.round(topGoal.current/topGoal.target*100)}% there.\n`:''}\nYou're on a 6-day publishing streak — protect it. My one suggestion: ${editing>2?'you have a few videos mid-edit. Pick the highest-priority one and push it to done before starting new footage.':'momentum looks healthy. A good day to get ahead on next week\'s content.'}`;
+  }
+  // today / plan
+  if(/today|work on|focus|what should i|plan/.test(s)){
+    const todo=daily.filter(t=>!t.done);
+    const high=todo.filter(t=>t.prio==='high');
+    if(!todo.length)return `Your task list is clear for today — nice. If you want to get ahead, I'd batch-film B-roll or draft a hook for one of your ${ideas.length} ideas. Want me to suggest one?`;
+    return `Start with what moves the needle. ${high.length?`Your high-priority items:\n${high.map(t=>'• '+t.text).join('\n')}\n\nKnock those out first`:`Top of your list:\n${todo.slice(0,3).map(t=>'• '+t.text).join('\n')}`}. Everything else can wait until those are done.`;
+  }
+  // hooks
+  if(/hook/.test(s)){
+    const topic=ideas.length?pick(ideas).title:'your next video';
+    return `Hooks for "<b>${topic}</b>" — open with tension, not a greeting:\n\n• "Nobody tells you this about ${topic.toLowerCase()}…"\n• "I was completely wrong about ${topic.toLowerCase()}. Here's what changed."\n• "If you've ever struggled with this, the next 60 seconds matter."\n• "I tracked this for 30 days so you don't have to."\n• "This one mistake cost me months. Don't repeat it."\n\nPick one, then make the first visual match its energy.`;
+  }
+  // ideas
+  if(/idea|video|content|brainstorm|topic/.test(s)){
+    return `Five ideas, built off what's already in your vault:\n\n• "The honest truth about ${ideas.length?pick(ideas).title.toLowerCase():'growing a channel'}"\n• A day-in-the-life of your editing workflow\n• "I tried [popular tool] for 7 days — here's the verdict"\n• Reacting to your own oldest video, with commentary\n• A beginner's mistakes roundup in your niche\n\nWant me to develop any of these into a hook and outline?`;
+  }
+  // caption / hashtags
+  if(/caption|hashtag|description|post/.test(s)){
+    return `Here's a caption + tags you can adapt:\n\n<b>Caption:</b> "New one's live 🎬 I broke down everything I wish I'd known earlier. The part at the end surprised even me — let me know what you think 👇"\n\n<b>Hashtags:</b> #contentcreator #creatortips #youtubegrowth #videoediting #behindthescenes #creatorlife\n\nKeep the first line punchy — it's all most people see before "more".`;
+  }
+  // repurpose
+  if(/repurpose|reuse|clip|short|cut down/.test(s)){
+    const v=pipe.length?pick(pipe).title:'your last video';
+    return `Repurposing "<b>${v}</b>" into a week of content:\n\n• 3 vertical Shorts from your strongest 30-second moments\n• 1 carousel post: the key takeaways as text slides\n• 1 quote graphic from your best line\n• A community/tweet poll asking the question your video answered\n• A "behind the scenes" Short of how you made it\n\nOne shoot, five posts. Want the hooks for the Shorts?`;
+  }
+  // title
+  if(/title|name.*video|headline/.test(s)){
+    return `Title options — specific beats clever:\n\n• "Why ${ideas.length?pick(ideas).title:'this'} Isn't Working (And the Fix)"\n• "I Did This for 30 Days — Here's What Happened"\n• "The Mistake Costing You Views"\n• "How I'd Start Over If I Had To"\n\nLead with the benefit or the tension, and keep it under ~60 characters so it doesn't get cut off.`;
+  }
+  // fallback — still useful, still coach-like
+  return `I can help with that. As your producer, here's where I'm most useful:\n\n• <b>Generate</b> — ideas, hooks, titles, captions, hashtags\n• <b>Plan</b> — what to work on today, how to repurpose a video\n• <b>Insights</b> — how your channel and goals are tracking\n\nTry one of the shortcuts on the right, or tell me what you're working on and I'll jump in. ${DB.get('ai_key','')?'':'(Tip: add your own API key in the panel to unlock full open-ended AI.)'}`;
+}
+
 /* ----- Profile / Settings ----- */
-function profile(){return DB.get('profile',{name:'Sajina',handle:'@sajina',role:'Content Creator'})}
-function profileName(){return profile().name||'there'}
+function profile(){return DB.get('profile',{name:'Creator',handle:'',role:'Content Creator'})}
+function profileName(){return profile().name||'Creator'}
 function initials(n){return (n||'').trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase()||'AZ'}
 function applyProfile(){
   const p=profile();
@@ -1757,7 +1898,7 @@ document.getElementById('menuToggle').onclick=()=>sidebarEl.classList.contains('
 backdropEl.onclick=closeMenu;
 document.getElementById('quickAddBtn').onclick=openQuickAdd;
 document.getElementById('notifBtn').onclick=()=>toast('You\'re all caught up','3 uploads scheduled this week.');
-document.getElementById('aiBtn').onclick=()=>toast('AI Assistant — next phase','Local smart assistant + bring-your-own-key lands next build.');
+document.getElementById('aiBtn').onclick=()=>go('assistant');
 
 /* keyboard */
 document.addEventListener('keydown',e=>{
