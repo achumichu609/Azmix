@@ -434,14 +434,26 @@ button{font-family:inherit}
 .exec-filters{display:flex;gap:var(--s2);margin-bottom:var(--s5)}
 
 @media(max-width:980px){.kanban{grid-template-columns:repeat(3,1fr)}.studio{grid-template-columns:1fr}.shot-row{grid-template-columns:30px 70px 1fr 60px;font-size:12px}.shot-row .shot-cam,.shot-row .shot-lens,.shot-row .shot-dur{display:none}.music-row{grid-template-columns:40px 1fr 80px 36px}.music-row .m-genre,.music-row .m-dur,.music-row .m-fav{display:none}}
+/* hamburger hidden on desktop; sidebar is a fixed drawer on mobile */
+.menu-toggle{display:none;flex:none}
+.sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(5,7,11,.6);backdrop-filter:blur(2px);z-index:39}
+.sidebar-backdrop.show{display:block}
 @media(max-width:1100px){.context{display:none}}
-@media(max-width:720px){.workspace{padding:var(--s6) var(--s5)}.search{display:none}}
+@media(max-width:720px){
+  .workspace{padding:var(--s6) var(--s5)}
+  .search{display:none}
+  .menu-toggle{display:grid}
+  .app{grid-template-columns:1fr}
+  .sidebar{position:fixed;top:60px;bottom:0;left:0;width:248px;z-index:40;transform:translateX(-100%);transition:transform .25s var(--ease)}
+  .sidebar.open{transform:translateX(0);box-shadow:var(--sh-lg)}
+}
 </style>
 </head>
 <body>
 <div class="app">
   <!-- TOP BAR -->
   <header class="topbar">
+    <button class="icon-btn menu-toggle" id="menuToggle" title="Menu" aria-label="Toggle menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
     <div class="brand">
       <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
         <rect x="6" y="6" width="88" height="88" rx="22" stroke="#262E3C" stroke-width="3"/>
@@ -504,6 +516,7 @@ button{font-family:inherit}
       <div class="nav-item" data-view="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg><span>Settings</span></div>
     </div>
   </nav>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
   <!-- MAIN -->
   <div class="main">
@@ -1624,9 +1637,16 @@ document.getElementById('globalSearch').addEventListener('keydown',e=>{
 function go(v){
   view=v;
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.view===v));
+  closeMenu();
   render();
 }
 document.querySelectorAll('.nav-item').forEach(n=>n.onclick=()=>go(n.dataset.view));
+/* mobile drawer */
+const sidebarEl=document.getElementById('sidebar'), backdropEl=document.getElementById('sidebarBackdrop');
+function openMenu(){sidebarEl.classList.add('open');backdropEl.classList.add('show');}
+function closeMenu(){sidebarEl.classList.remove('open');backdropEl.classList.remove('show');}
+document.getElementById('menuToggle').onclick=()=>sidebarEl.classList.contains('open')?closeMenu():openMenu();
+backdropEl.onclick=closeMenu;
 document.getElementById('quickAddBtn').onclick=openQuickAdd;
 document.getElementById('notifBtn').onclick=()=>toast('You\'re all caught up','3 uploads scheduled this week.');
 document.getElementById('aiBtn').onclick=()=>toast('AI Assistant — next phase','Local smart assistant + bring-your-own-key lands next build.');
@@ -1634,7 +1654,7 @@ document.getElementById('aiBtn').onclick=()=>toast('AI Assistant — next phase'
 /* keyboard */
 document.addEventListener('keydown',e=>{
   if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();cmdk.classList.contains('open')?closeCmdk():openQuickAdd();}
-  if(e.key==='Escape'){closeModal();closeCmdk();}
+  if(e.key==='Escape'){closeModal();closeCmdk();closeMenu();}
 });
 
 /* helpers */
