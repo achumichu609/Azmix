@@ -34,7 +34,8 @@ button{font-family:inherit}
 ::-webkit-scrollbar-thumb:hover{background:#33405280}
 
 /* ---------- app frame ---------- */
-.app{position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr;grid-template-areas:"top top" "side main";height:100vh}
+.app{position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto 1fr;grid-template-areas:"demo demo" "top top" "side main";height:100vh}
+.demo-banner{grid-area:demo}
 .topbar{grid-area:top;height:60px;display:flex;align-items:center;gap:var(--s5);padding:0 var(--s6);border-bottom:1px solid var(--line);background:rgba(18,22,31,.72);backdrop-filter:blur(14px)}
 .brand{display:flex;align-items:center;gap:var(--s3);flex:none}
 .brand svg{width:34px;height:34px}
@@ -211,6 +212,25 @@ button{font-family:inherit}
 .soon-card .badge{font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;color:var(--mint);border:1px solid rgba(0,229,199,.3);background:rgba(0,229,199,.06);padding:5px 12px;border-radius:999px;display:inline-block;margin-bottom:var(--s5)}
 .soon-card h2{font-family:'Space Grotesk';font-size:26px;font-weight:700;margin-bottom:var(--s3)}
 .soon-card p{color:var(--text-dim);font-size:14px}
+
+/* ---- DEMO paywall + banner ---- */
+.lock-wrap{display:flex;align-items:center;justify-content:center;min-height:62vh;padding:var(--s6)}
+.lock-card{text-align:center;max-width:460px;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-xl);padding:var(--s8) var(--s7);position:relative;overflow:hidden}
+.lock-card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px 200px at 50% -10%,rgba(0,229,199,.1),transparent 70%);pointer-events:none}
+.lock-card .lock-ic{width:64px;height:64px;border-radius:var(--r-lg);background:rgba(0,229,199,.1);border:1px solid rgba(0,229,199,.25);display:grid;place-items:center;margin:0 auto var(--s5);color:var(--mint)}
+.lock-card h2{font-family:'Space Grotesk';font-size:24px;font-weight:700;margin-bottom:var(--s3)}
+.lock-card p{color:var(--text-dim);font-size:14px;line-height:1.6;margin-bottom:var(--s6)}
+.lock-card .buy-big{background:var(--mint);color:var(--mint-deep);border:none;border-radius:var(--r);padding:13px 28px;font-size:15px;font-weight:600;cursor:pointer;transition:transform .12s var(--ease),box-shadow .12s var(--ease);display:inline-flex;align-items:center;gap:8px}
+.lock-card .buy-big:hover{transform:translateY(-2px);box-shadow:var(--glow)}
+.lock-card .price-note{margin-top:var(--s4);font-family:'JetBrains Mono';font-size:12px;color:var(--text-faint)}
+.demo-banner{background:linear-gradient(90deg,rgba(0,229,199,.12),rgba(124,156,255,.08));border-bottom:1px solid var(--line);padding:8px var(--s6);display:flex;align-items:center;gap:var(--s3);font-size:13px;color:var(--text-dim);flex-wrap:wrap}
+.demo-banner b{color:var(--mint);font-family:'Space Grotesk'}
+.demo-banner .bb{margin-left:auto;background:var(--mint);color:var(--mint-deep);border:none;border-radius:var(--r-sm);padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:transform .12s var(--ease)}
+.demo-banner .bb:hover{transform:translateY(-1px)}
+.nav-item .lockic{margin-left:auto;color:var(--text-faint);flex:none}
+.sidebar.collapsed .nav-item .lockic{display:none}
+.buy-top{background:var(--mint)!important;color:var(--mint-deep)!important;border:none!important}
+
 
 /* ---- Script Studio ---- */
 .studio{display:grid;grid-template-columns:236px 1fr;gap:var(--s5);min-height:62vh}
@@ -501,6 +521,7 @@ button{font-family:inherit}
 </head>
 <body>
 <div class="app">
+  <div class="demo-banner">🎬 <b>Demo mode</b> — explore freely, but saving and premium features are locked. <span style="opacity:.7">Get the full app to unlock everything.</span><button class="bb" onclick="goBuy()">Buy full version →</button></div>
   <!-- TOP BAR -->
   <header class="topbar">
     <button class="icon-btn menu-toggle" id="menuToggle" title="Menu" aria-label="Toggle menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg></button>
@@ -524,7 +545,8 @@ button{font-family:inherit}
       <button class="icon-btn" id="notifBtn" title="Notifications"><span class="dot"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></button>
       <button class="icon-btn" id="aiBtn" title="AI Assistant"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/><circle cx="12" cy="12" r="4"/></svg></button>
       <button class="btn btn-primary" id="quickAddBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>Quick Add</button>
-      <div class="avatar" id="avatar">SA</div>
+      <button class="btn buy-top" onclick="goBuy()" style="font-size:13px">Buy full version</button>
+      <div class="avatar" id="avatar">AZ</div>
     </div>
   </header>
 
@@ -533,7 +555,7 @@ button{font-family:inherit}
     <div class="nav-group">
       <div class="lbl">Workspace</div>
       <div class="nav-item active" data-view="dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg><span>Command Center</span></div>
-      <div class="nav-item" data-view="assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/><circle cx="12" cy="12" r="4"/></svg><span>AI Assistant</span></div>
+      <div class="nav-item" data-view="assistant"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/><circle cx="12" cy="12" r="4"/></svg><span>AI Assistant</span><svg class="lockic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
       <div class="nav-item" data-view="daily"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Daily Execution</span></div>
     </div>
     <div class="nav-group">
@@ -554,13 +576,13 @@ button{font-family:inherit}
     </div>
     <div class="nav-group">
       <div class="lbl">Business</div>
-      <div class="nav-item" data-view="deals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1Z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span>Brand Deals</span></div>
-      <div class="nav-item" data-view="finance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Creator Finance</span></div>
+      <div class="nav-item" data-view="deals"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1Z"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg><span>Brand Deals</span><svg class="lockic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+      <div class="nav-item" data-view="finance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span>Creator Finance</span><svg class="lockic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
     </div>
     <div class="nav-group">
       <div class="lbl">Growth</div>
-      <div class="nav-item" data-view="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg><span>Analytics</span></div>
-      <div class="nav-item" data-view="growth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg><span>Growth Engine</span></div>
+      <div class="nav-item" data-view="analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg><span>Analytics</span><svg class="lockic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+      <div class="nav-item" data-view="growth"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg><span>Growth Engine</span><svg class="lockic" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
     </div>
     <div class="nav-group">
       <div class="lbl">Settings</div>
@@ -583,9 +605,26 @@ button{font-family:inherit}
 
 <script>
 /* ========== STORAGE (per-module, per Part 3) ========== */
+/* ===== DEMO MODE ===== */
+const DEMO = true;
+const BUY_URL = "https://mohdaxel.gumroad.com/l/smqrz";
+const LOCKED_VIEWS = ["deals","finance","analytics","growth","assistant"];
+function goBuy(){ window.open(BUY_URL, "_blank"); }
+function demoBlock(){
+  toast("Full version only 🔒","Saving is available in the full version of AzMix.");
+}
 const DB = {
-  get(k, fallback){ try{const v=localStorage.getItem('azmix:'+k);return v?JSON.parse(v):fallback}catch{return fallback} },
-  set(k, v){ try{localStorage.setItem('azmix:'+k, JSON.stringify(v))}catch{} }
+  _mem:{},
+  get(k, fallback){
+    if(DEMO){ // read from in-memory (seeded) — never localStorage, so nothing persists
+      return (k in this._mem) ? this._mem[k] : fallback;
+    }
+    try{const v=localStorage.getItem('azmix:'+k);return v?JSON.parse(v):fallback}catch{return fallback}
+  },
+  set(k, v){
+    if(DEMO){ this._mem[k]=v; return; } // held only for this session, lost on refresh
+    try{localStorage.setItem('azmix:'+k, JSON.stringify(v))}catch{}
+  }
 };
 const uid = ()=> Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 
@@ -733,8 +772,20 @@ function toast(title,msg){
 
 /* ========== RENDER ROUTER ========== */
 const WS=document.getElementById('workspace'), CTX=document.getElementById('context');
+const LOCK_NAMES={deals:'Brand Deals',finance:'Creator Finance',analytics:'Analytics',growth:'Growth Engine',assistant:'AI Assistant'};
+function renderLocked(){
+  const name=LOCK_NAMES[view]||'This feature';
+  WS.innerHTML=`<div class="lock-wrap"><div class="lock-card">
+    <div class="lock-ic"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+    <h2>${name} is a premium feature</h2>
+    <p>You're exploring the free demo of AzMix. ${name} — along with Analytics, Creator Finance, Brand Deals, Growth Engine, and the AI Assistant — is unlocked in the full version, which also lets you save your work.</p>
+    <button class="buy-big" onclick="goBuy()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5v14"/></svg>Get the full version</button>
+    <div class="price-note">One-time purchase · yours to keep forever</div>
+  </div></div>`;
+}
 function render(){
   WS.classList.remove('fade-in');void WS.offsetWidth;WS.classList.add('fade-in');
+  if(DEMO && LOCKED_VIEWS.includes(view)){ renderLocked(); renderContext(); return; }
   ({dashboard:renderDashboard,calendar:renderCalendar,ideas:renderIdeas,scripts:renderScripts,pipeline:renderPipeline,deals:renderDeals,settings:renderSettings,analytics:renderAnalytics,growth:renderGrowth,goals:renderGoals,shoots:renderShoots,shots:renderShots,uploads:renderUploads,music:renderMusic,thumbs:renderThumbs,daily:renderDaily,finance:renderFinance,assistant:renderAssistant}[view]||renderSoon)();
   renderContext();
 }
